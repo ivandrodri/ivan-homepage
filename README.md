@@ -1,46 +1,71 @@
-# Dr. Ivan Diego Rodriguez - Professional CV
+# CV
 
-Welcome to my personal CV webpage! This GitHub-hosted site showcases my professional journey, technical expertise, and accomplishments in AI engineering and academia. 
+Welcome to my personal CV webpage! This site showcases my professional journey, technical expertise, and 
+some of the cool projects I had the opportunity to work with as an AI engineer and as a theoretical physicist researcher
+in academia. 
 
 ## About Me
-I am a seasoned AI engineer with deep expertise in artificial intelligence, software development, and high-performance computing (HPC). My career spans impactful roles in both industry and academia, where I've developed advanced machine learning solutions and contributed to fundamental physics research.
 
-- **Current Role**: Principal AI Engineer at [appliedAI Initiative](https://www.appliedai.de/en/), Munich.
-- **Past Academic Career**: Research roles at Max Planck Institute, SISSA, and other leading institutions.
+I am an experienced AI engineer with deep expertise in artificial intelligence, software development,
+and high-performance computing (HPC), gained from both academia and the private sector. I have led
+numerous projects in machine learning, and I frequently serve as a technical lead, translating complex
+business challenges into innovative AI solutions. Proficient in Python, C++, and CUDA GPGPU programming,
+I have a proven track record of delivering impactful AI-driven projects.
 
-## Expertise and Interests
-- **Artificial Intelligence**: Machine learning (Bayesian ML, RL, RAG), generative AI for engineering design.
-- **High-Performance Computing**: CUDA, GPGPU programming, scalable algorithms for simulation.
-- **Physics-Informed AI**: Embedding physical principles into AI models for robust dynamical systems.
+## Expertise and Interests:
 
-## Recent Highlights
-- Inventor of EU/US patents for AI-based imaging calibration and HPC algorithms.
-- Developed ML surrogate models that reduced CAD design optimization times from hours to seconds.
-- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies.
+I am passionate about various fields of Machine Learning, particularly Deep Learning, Bayesian Machine Learning, 
+Reinforcement Learning (RL) and surrogate models to speed up complex physics simulations. 
+I am also interested in leveraging large language models (LLMs) and transformers in areas such as Retrieval-Augmented 
+Generation (RAG), generative AI for engineering design, and techniques like Imitation Learning or Behavioral Cloning.
+
 
 ## Professional Timeline
-- **2021–Present**: Principal AI Engineer, [appliedAI Initiative](https://www.appliedai.de/en/)
-- **2017–2021**: Head of R&D, Evomecs GmbH
-- **2008–2016**: Research Fellow, Max Planck Institute and SISSA
-- **PhD in Theoretical Physics**: University of Florence
+
+- **Current Role - 2021–Present**: Principal AI Engineer at [appliedAI Initiative](https://www.appliedai.de/en/), Munich.
+- **2017–2021**: Head of R&D, [Evomecs GmbH](https://www.evomecs.com/en) 
+- **Past Academic Career - 2008-2016**: Research roles at [Max Planck Institute for Quantum Optics](https://www.mpq.mpg.de/en), 
+  [SISSA](https://www.sissa.it/about), [Autonomous University of Madrid](https://www.uam.es/FisicaTeorica/Home.htm?language=en]), 
+  and other leading institutions.
+- **PhD in Theoretical Physics - 2005-2008**: [University of Florence](https://www.fisica.unifi.it/changelang-eng.html) 
+
 
 ## Selected Projects
--  <a href="/project/">Projects</a>
-- [RAG System for Technical Documentation](#)
-- [Advanced HPC for Quantum Simulations](#)
 
-## Publications
+I have worked on many cool projects throughout my academic and private sector career. While many of these are confidential, 
+I have selected a few to showcase as examples of my previous work.
+
+- <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> - 
+  [link to repo](https://github.com/ivandrodri/offline-rl.git) - [link to html notebooks](https://ivandrodri.github.io/offline-rl/index.html)
+- GPU based voxelizer - [link to repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git)
+- <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
+   (private repo for now) 
+- RAG System for Technical Documentation (
+  [appliedAI](https://www.appliedai.de/en/) / [deepset](https://www.deepset.ai/) /
+  [rohde & schwarz](https://www.rohde-schwarz.com/de/startseite_48230.html) collaboration) 
+  [see white paper](https://www.appliedai.de/en/insights/trustworthy-rag-in-wireless-test-measurement-retrieval-fine-tuning)
+
+## Recent Highlights
+
+- Inventor of EU and US patents, including AI-driven imaging calibration technologies for electron microscopy and 
+  high-speed milling collision detection simulations in CNC manufacturing for process optimization.
+- Developed ML surrogate models that reduced CAD design optimization times from hours to seconds.
+- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies 
+ [link1](https://transferlab.ai/trainings/intro-rl/) - [link2](https://transferlab.ai/trainings/bayesian-ml-intro/).
+
+## Selected Physic Publications
+
 1. [Neural-network quantum states and chiral topological states](https://journals.aps.org/prx/pdf/10.1103/PhysRevX.8.011006)
 2. [Evaluation of ranks of entanglement spectra](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.108.256806)
 3. [Entanglement entropy of integer Quantum Hall states](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.80.153303)
-4. [Jain states in matrix theory](https://iopscience.iop.org/article/10.1088/1126-6708/2006/12/056)
+4. [Phd Thesis: Matrix Effective Theories of the Quantum Hall Effect](https://s3.cern.ch/inspire-prod-files-b/ba49888c08d64ebff73b274a63986b2d)
 
 See my full [Google Scholar Profile](https://scholar.google.com/citations?hl=en&user=PQ3v5HQAAAAJ).
 
 ## Contact
 - 📧 Email: [ivandiegorodriguez@gmail.com](mailto:ivandiegorodriguez@gmail.com)
-- 💼 LinkedIn: [linkedin.com/in/dr-ivan-rodriguez](#)
-- 📂 GitHub: [github.com/ivanrodri2020](#)
+- 💼 LinkedIn: [...](#)
+- 📂 GitHub: [...](#)
 
 ---
 
