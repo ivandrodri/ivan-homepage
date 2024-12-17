@@ -1,4 +1,4 @@
-# Dr. Ivan Diego Rodriguez - Professional CV
+# CV
 
 Welcome to my personal CV webpage! This GitHub-hosted site showcases my professional journey, technical expertise, and accomplishments in AI engineering and academia. 
 
