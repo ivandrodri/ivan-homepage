@@ -7,7 +7,7 @@ permalink: /projects/
 
 ### The Challenge  
 The milling process involves a **sequential dependency**:  
-At each time step \( t = j \), the material shape depends on all previous steps \( (t = 0 \ \text{to} \ t = j-1) \).  
+At each time step  ` t = j `, the material shape depends on all previous steps $` (t = 0  to  t = j-1) `$ .
 To compute collisions:
 - The simulation runs **sequentially**, leading to a complexity of \( O(N) \), where \( N \sim 10^6 \) for complex shapes.
 
