@@ -4,7 +4,7 @@ title: CNC milling simulation.
 permalink: /projects/
 ---
 
-{% include ivan-homepage/_includes/lib/mathjax.html %}
+{% include lib/mathjax.html %}
 
 ## Innovative GPU-Based Milling/Collision Simulator
 
