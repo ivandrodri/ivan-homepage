@@ -19,7 +19,7 @@ I have a proven track record of delivering impactful AI-driven projects.
 - **Physics-Informed AI**: Embedding physical principles into AI models for robust dynamical systems.
 
 ## Selected Projects
--  <a href="/projects/">GPU based CNC milling/collision detection simulation</a>
+-  <a href="/ivan-homepage/projects/">GPU based CNC milling/collision detection simulation</a>
 - [RAG System for Technical Documentation](#)
 - [Advanced HPC for Quantum Simulations](#)
 

@@ -1,12 +1,9 @@
 ---
 layout: default
-title: Projects
+title: CNC milling simulation. 
 permalink: /projects/
 ---
-
-# My Projects
-
-## Project 1: AI Model Optimization
+## CNC milling simulation.
 ![Screenshot of project](assets/images/project1.png)
 A brief description of the project and its highlights.
 
