@@ -3,31 +3,47 @@ layout: default
 title: CNC milling simulation. 
 permalink: /projects/
 ---
-## CNC milling/collision simulation.
-![Screenshot of project](assets/images/project1.png)
+## Innovative GPU-Based Milling and Collision Detection
 
-The main idea of the project was to create a very fast milling/collision simulation in a manufacturing process as you
-can see in the figure below.
+### The Challenge  
+The milling process involves a **sequential dependency**:  
+At each time step \( t = j \), the material shape depends on all previous steps \( (t = 0 \ \text{to} \ t = j-1) \).  
+To compute collisions:
+- The simulation runs **sequentially**, leading to a complexity of \( O(N) \), where \( N \sim 10^6 \) for complex shapes.
 
-# ToDo: Result with collision time and simulation
+Even with parallel collision detection at a single time step, the sequential nature remains a **bottleneck**.
 
+### Existing Solutions  
+CAM software typically computes collisions in **time windows**:
+- ✅ Speeds up simulations.  
+- ⚠️ Risks **false positives** for collisions.  
+- ⚠️ Produces **suboptimal tool paths**, relying on CAM programmer experience to avoid potential issues.
 
-Note that this problem can be splitup in two. 
+---
 
-The main issue is that the shape evolves in time during manufacturing and to compute collision detection sequentially 
-is a huge bottleneck. For that reason CAM software's usually computes the collisions in time windows as shown below: 
+### Our Solution  
+We developed an **innovative, fully parallelizable approach** using a **reduction operation/error-correction method**:  
 
+- Transforms the sequential \( O(N) \) problem into a **fully parallel** one with complexity \( O(\log N) \).  
+- Implemented entirely on the **GPU** for maximum performance.
+- EU/USA patents granted
 
-
-The positive side is that you can reduce the milling/collision simulation time a lot but at the risk to get many 
-potential collisions between the different shapes, i.e. machine plus working-piece. 
-
-
-
-
-## Project 2: Interactive Dashboard
 <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
 
+---
+
+### Key Features  
+- 🚀 **Fully GPU-Accelerated**: The milling/collision simulator runs completely inside the GPU.  
+- 🧩 **Two-Voxelization Model**:  
+   - Saves **local milling and collision data** for the work-piece.  
+   - Optimizes calculations to achieve parallel processing efficiency.
+   - For the two voxelization model we implemented the method developed in the paper 
+     [Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201) . 
+     For a simple version of the voxelizer give a look to my [repo]()
+
+---
+
+This method significantly reduces simulation time while ensuring **accurate, collision-free tool paths**.
 
 
 <a href="/ivan-homepage/">
