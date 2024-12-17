@@ -1,19 +1,20 @@
-{% include ivan-homepage/_includes/lib/mathjax.html %}
-
 ---
 layout: default
 title: CNC milling simulation. 
 permalink: /projects/
 ---
+
+{% include ivan-homepage/_includes/lib/mathjax.html %}
+
 ## Innovative GPU-Based Milling/Collision Simulator
 
 ### The Challenge  
 The milling process involves a **sequential dependency**:  
 
-At each time step $$t = j$$, the material shape depends on all previous steps $$ (t = 0  \to  t = j-1) $$ .
-To compute collisions:
+At each time step $$t = j$$, the material shape depends on all previous steps ( $$t = 0$$  to  $$t = j-1$$ ) .
+To compute collisions: 
 
-- The simulation runs **sequentially**, leading to a complexity of  $$ O(N) $$, where $$ N \sim 10^6 $$ for complex shapes.
+- The simulation runs **sequentially**, leading to a complexity of $$ O(N) $$, where $$ N \sim 10^6 $$ for complex shapes.
 
 **Even with parallel collision detection at a single time step, the sequential nature remains a bottleneck**.
 
