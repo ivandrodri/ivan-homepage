@@ -36,7 +36,21 @@ We developed an **innovative, fully parallelizable approach** using a **reductio
 - Implemented entirely on the **GPU** for maximum performance.
 - EU/USA patents granted
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebM Video</title>
+</head>
+<body>
+    <h1>My WebM Video</h1>
+    <video width="640" height="360" controls>
+        <source src="../assets/videos/cnc_simul.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+</body>
+</html>
 
 ---
 
