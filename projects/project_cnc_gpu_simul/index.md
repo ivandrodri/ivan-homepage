@@ -73,7 +73,7 @@ with collisions highlighted in **red voxels**.
         /* Styles for the video container */
         .video-container {
             text-align: left;
-            margin: 0px;
+            margin: 10px 0;
         }
     </style>
 </head>
