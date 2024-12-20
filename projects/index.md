@@ -51,10 +51,10 @@ permalink: /projects/
 <body>
     <!-- Example Image Containers -->
     <div class="image-container">
-        <img src="/path/to/image1.jpg" alt="Description 1" class="lightbox-thumbnail">
+        <img src="../assets/img/two_level_voxel_model.png" alt="Description 1" class="lightbox-thumbnail">
     </div>
     <div class="image-container">
-        <img src="/path/to/image2.jpg" alt="Description 2" class="lightbox-thumbnail">
+        <img src="../assets/img/henhis_face.png" alt="Description 2" class="lightbox-thumbnail">
     </div>
     <!-- Lightbox Modal (only need one) -->
     <div id="lightbox" class="lightbox">
@@ -93,15 +93,18 @@ permalink: /projects/
 ## Innovative GPU-Based Milling/Collision Simulator
 
 ---
-### The Challenge  
-The milling process involves a **sequential dependency**:  
 
-At each time step $$t = j$$, the material shape depends on all previous steps ( $$t = 0$$  to  $$t = j-1$$ ) .
-To compute collisions: 
+### The Challenge 😟
 
-- The simulation runs **sequentially**, leading to a complexity of $$ O(N) $$, where $$ N \sim 10^6 $$ for complex shapes.
+The milling process involves a **sequential dependency**:
 
-**Even with parallel collision detection at a single time step, the sequential nature remains a bottleneck**.
+At each time step \( t = j \), the material shape depends on all previous steps (\( t = 0 \) to \( t = j - 1 \)).
+
+### To compute collisions:
+
+The simulation runs sequentially, leading to a complexity of **O(N)**, where \( N \sim 10^6 \) for complex shapes.
+
+Even with parallel collision detection at a single time step, the **sequential nature remains a bottleneck**. 😔
 
 ---
 
