@@ -151,7 +151,7 @@ Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine
 <body>
     <!-- Video Section -->
     <div class="video-container">
-        <video width="640" height="360" controls>
+        <video width="340" height="360" controls>
             <source src="../assets/videos/cnc_simul.webm" type="video/webm">
             Your browser does not support the video tag.
         </video>
@@ -254,7 +254,12 @@ We leverage **CUDA stream parallelization** for improved performance, achieving 
 - **2 streams: 202646 milliseconds**   
 - **4 streams: 198754 milliseconds**   
 
-> **Note:** In this example, only the **tool holder** is used for collision detection to manage GPU memory. If the GPU is overloaded with the full mesh data of all machine surfaces, as this is a small GPU, the limited resources (e.g., CUDA cores and memory) would force streams to execute sequentially, reducing the benefits of stream  parallelization. This can be seen for 4 streams where the speedup doesn't increase beyond the 2 stream case.  However, with **multiple GPUs**, the full simulation (including all machine surfaces) would again  demonstrate significant stream parallelization speed-ups.  
+> **Note:** In this example, only the **tool holder** is used for collision detection to manage GPU memory. 
+> If the GPU is overloaded with the full mesh data of all machine surfaces, as this is a small GPU, 
+> the limited resources (e.g., CUDA cores and memory) would force streams to execute sequentially, reducing the 
+> benefits of stream  parallelization. This can be seen for 4 streams where the speedup doesn't increase beyond the 
+> 2 stream case. Instead, from 1 to 2 streams the speedup is around 1.7. Nevertheless, with **multiple GPUs**, the full 
+> simulation (including all machine surfaces) would again demonstrate significant stream parallelization speed-ups.  
 
 ---
 
@@ -276,71 +281,52 @@ Our approach focuses on **time-parallelization**, avoiding traditional bottlenec
 - The algorithm can use multiple GPUs but also multiple streams within a single GPU for task parallelism in order to
   speed up our time parallel simulation.
 
-To implement the two-level voxelization, we adopted the method from the paper [Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201). For a simplified version (single-level voxelization), check out my [voxelizer repo](#).  
+To implement the two-level voxelization, we adopted the method from the paper 
+[Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201). For a simplified version (single-level voxelization), 
+check out my [voxelizer repo](#).  
 
 ---
 
-## Advanced Design with Modern C++ 💡  
+## Template Metaprogramming with CUDA/C++ 💡  
 
-To achieve a clean, object-oriented design while adhering to **SOLID principles** at the CUDA level:  
+To achieve a clean, object-oriented design while adhering to the **SOLID principles** at the CUDA level:
 
-- We use **template metaprogramming** to mimic **dependency injection** at compile time.  
+- We use **template metaprogramming** to mimic **dependency injection** at compile time.
 - This approach eliminates runtime overhead while maintaining performance and flexibility.
 
 The code looks like this:
 
-``` cpp
+Given the interface `ITwoLevelVoxelModel`, we use the implementation `TwoLevelModelSimple`, as shown in the examples above. This is the voxel model for the workpiece.
 
-// Given the interface ITwoLevelVoxelModel we will use the implementation TwoLevelModelSimple, i.e. the one used
-// on the examples above. This is the voxel model for the workpiece. 
-
+```cpp
 typedef ITwoLevelVoxelModel<TwoLevelModelSimple> VoxelModel;
+```
 
+`IMillingArchitecture` is the interface associated with the parallelization type, such as multiple GPU time parallelization (`MillingParallelNcMultiGpu`), which uses our algorithm, or a time-sequential one (`MillingSerialNc`), as done in standard CAM software.
 
-// IMillingArchitecture is the interface associated with the parallelization type, like multiple GPU time 
-// parallelization 'MillingParallelNcMultiGpu' , i.e. using our algorithm or just a time sequential one 
-// 'MillingSerialNc' as done in standard CAM softwares. 
-
+``` cpp
 typedef IMillingArchitecture<MillingParallelNcMultiGpu, VoxelModel> MillingArch;     
 //typedef IMillingArchitecture<MillingSerialNc, VoxelModel> MillingArch;   
+```
 
+`IMachineKinematics` defines the kinematics of the machine. In the example above, we used a 5-axis configuration, but it could also be a 3+2-axis or 3-axis machine, etc.
 
-// IMachineKinematics defines the kinematics of the machine. In the example above we used a 5 axis but it could be 
-// 3+2-axis or 3-axis, etc.
-
+``` cpp
 typedef IMachineKinematics<FiveAxisKinematics> MachineKinematics;
+```
 
+Finally, we create the Machine to run the simulation.
 
-// Finally we create the Machine to run the simulation
-
+``` cpp
 typedef MachineBasic<IMachineKinematics, MillingArch, VoxelModel> MachineBasic;
 ```
 
 ---
 
-### Key Features  
-- 🚀 **Fully GPU-Accelerated**: The milling/collision simulator runs completely inside the GPU.
-- 🧩 **Two-Voxelization Model**:  
-   - Saves **local milling and collision data** for the work-piece.  
-   - Optimizes calculations to achieve parallel processing efficiency.
-   - For the two voxelization model we implemented the method developed in the paper 
-     [Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201) . 
-     For a simple version of the voxelizer give a look to my [repo]()
-    
-    ToDo: --> Add an image here  
+**BONUS:** 
 
--  Another cool aspect of this project is the use of template metaprogramming!
-    
-    ToDo: --> Show metatemplate code
- 
----
-
-This method significantly reduces simulation time while ensuring **accurate, collision-free tool paths**. 
-
-BONUS: 
-
-Leverage this high-speed simulator to **optimize toolpaths** further using advanced techniques, such as 
-**Reinforcement Learning**, to enhance performance and accuracy even more.
+Leverage this high-speed simulator to **optimize toolpaths** further using advanced techniques such as 
+**Reinforcement Learning** to enhance performance and accuracy even more. This is still a work in progress (WIP). 😊
 
 
 <a href="/ivan-homepage/">
