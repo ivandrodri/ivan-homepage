@@ -1,28 +1,14 @@
----
-layout: default
-title: CNC milling simulation. 
-permalink: /projects/
----
-{% include lib/mathjax.html %}
-
-
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reusable Image Lightbox Example</title>
     <style>
         .image-container {
             text-align: center;
             margin: 20px;
-            /* Add display: inline-block to prevent unwanted text display */
             display: inline-block;
         }
         .lightbox-thumbnail {
             width: 300px;
             cursor: pointer;
             transition: transform 0.3s ease;
-            /* Ensure images don't have extra space below */
             display: block;
         }
         .lightbox {
@@ -52,47 +38,43 @@ permalink: /projects/
         }
     </style>
 </head>
-<body>
-    <!-- Example of how to add images -->
-    <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
-    </div>
-    <div class="image-container">
-        <img src="../assets/img/two_level_voxel_model.png" alt="Two level voxel model" class="lightbox-thumbnail">
-    </div>
-    <!-- Lightbox Modal (only need one) -->
-    <div id="lightbox" class="lightbox">
-        <span class="close">&times;</span>
-        <img id="lightboxImage" src="" alt="">
-    </div>
-    <script>
-        // Get the lightbox elements
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const closeBtn = document.querySelector(".close");
-        // Add click event to all thumbnails
-        document.querySelectorAll('.lightbox-thumbnail').forEach(thumbnail => {
-            thumbnail.addEventListener('click', function() {
-                lightbox.style.display = "flex";
-                lightboxImage.src = this.src;
-                lightboxImage.alt = this.alt;
-            });
+<!-- Lightbox Modal (place this once, anywhere in your markdown) -->
+<div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightboxImage" src="" alt="">
+</div>
+<script>
+    // Get the lightbox elements
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const closeBtn = document.querySelector(".close");
+    // Add click event to all thumbnails
+    document.querySelectorAll('.lightbox-thumbnail').forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            lightbox.style.display = "flex";
+            lightboxImage.src = this.src;
+            lightboxImage.alt = this.alt;
         });
-        // Close lightbox when clicking the close button
-        closeBtn.addEventListener("click", function() {
+    });
+    // Close lightbox when clicking the close button
+    closeBtn.addEventListener("click", function() {
+        lightbox.style.display = "none";
+    });
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener("click", function(event) {
+        if (event.target === lightbox) {
             lightbox.style.display = "none";
-        });
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
-</body>
-</html>
+        }
+    });
+</script>
 
 
+---
+layout: default
+title: CNC milling simulation. 
+permalink: /projects/
+---
+{% include lib/mathjax.html %}
 
 ## Innovative GPU-Based Milling/Collision Simulator
 
@@ -102,11 +84,11 @@ permalink: /projects/
 
 The milling process involves a **sequential dependency**:
 
-At each time step \( t = j \), the material shape depends on all previous steps (\( t = 0 \) to \( t = j - 1 \)).
+At each time step ```t = j```, the material shape depends on all previous steps  ```t = 0``` to ```t = j - 1```).
 
 ### To compute collisions:
 
-The simulation runs sequentially, leading to a complexity of **O(N)**, where \( N \sim 10^6 \) for complex shapes.
+The simulation runs sequentially, leading to a complexity of ```~O(N)```, where ```N ~ 10^6``` for complex shapes.
 
 Even with parallel collision detection at a single time step, the **sequential nature remains a bottleneck**. 😔
 
@@ -125,16 +107,18 @@ CAM software typically **computes collisions at specific time windows** to speed
 
 We developed an **innovative, fully parallelizable algorithm** using a **reduction operation/error-correction method**:  
 
-- Transforms the sequential \( O(N) \) problem into a **fully parallel** one with complexity \( O(\log N) \).  
+- Transforms the sequential ```O(N)``` problem into a **fully parallel** one with complexity ```O( log N)```.  
 - Implemented entirely on the **GPU** for maximum performance.
 - EU/USA patents granted
 
 **Our Approach**:
 
 - 🚀 Achieves significant speedup through full-time parallelization using CUDA cores and stream parallelism.
-- 🚀 Enables more optimal tool paths, allowing CAM programmers to focus on path optimization. Collisions are flagged automatically, specifying the exact time and location of the issue. 
+- 🚀 Enables more optimal tool paths, allowing CAM programmers to focus on path optimization. Collisions are flagged 
+  automatically, specifying the exact time and location of the issue. 
 
-To implement our algorithm, we have developed a milling and collision simulation from scratch using **CUDA/C++** for high-performance computations and a simple rendering visualizer built with **VTK**.
+To implement our algorithm, we have developed a milling and collision simulation from scratch using **CUDA/C++** for 
+high-performance computations and a simple rendering visualizer built with **VTK**.
 
 ---
 
@@ -147,7 +131,8 @@ Our simulator employs a **two-level voxel model**:
     <img src="../assets/img/two_level_voxel_model.png" alt="Your description" class="lightbox-thumbnail">
 </div>
 
-Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
+Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine demonstrates collision detection, 
+with collisions highlighted in **red voxels**.
 
 <html lang="en">
 <head>
@@ -240,20 +225,24 @@ To achieve a clean, object-oriented design while adhering to the **SOLID princip
 
 The code looks like this:
 
-Given the interface `ITwoLevelVoxelModel`, we use the implementation `TwoLevelModelSimple`, as shown in the examples above. This is the voxel model for the workpiece.
+Given the interface `ITwoLevelVoxelModel`, we use the implementation `TwoLevelModelSimple`, as shown in the examples 
+above. This is the voxel model for the workpiece.
 
 ```cpp
 typedef ITwoLevelVoxelModel<TwoLevelModelSimple> VoxelModel;
 ```
 
-`IMillingArchitecture` is the interface associated with the parallelization type, such as multiple GPU time parallelization (`MillingParallelNcMultiGpu`), which uses our algorithm, or a time-sequential one (`MillingSerialNc`), as done in standard CAM software.
+`IMillingArchitecture` is the interface associated with the parallelization type, such as multiple GPU time 
+parallelization (`MillingParallelNcMultiGpu`), which uses our algorithm, or a time-sequential one (`MillingSerialNc`), 
+as done in standard CAM software.
 
 ``` cpp
 typedef IMillingArchitecture<MillingParallelNcMultiGpu, VoxelModel> MillingArch;     
 //typedef IMillingArchitecture<MillingSerialNc, VoxelModel> MillingArch;   
 ```
 
-`IMachineKinematics` defines the kinematics of the machine. In the example above, we used a 5-axis configuration, but it could also be a 3+2-axis or 3-axis machine, etc.
+`IMachineKinematics` defines the kinematics of the machine. In the example above, we used a 5-axis configuration, but 
+it could also be a 3+2-axis or 3-axis machine, etc.
 
 ``` cpp
 typedef IMachineKinematics<FiveAxisKinematics> MachineKinematics;
