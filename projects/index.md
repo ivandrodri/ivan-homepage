@@ -160,7 +160,8 @@ Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine
 </html>
 
 
-The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. However, our system is capable of handling much more complex cases, such as the one shown below:
+The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
+However, **our simulator is capable of handling much more complex cases**, such as the one shown below:
 
 <html lang="en">
 <head>
@@ -249,7 +250,9 @@ The video demonstrates a simple example with a relatively large L2 voxel size fo
   - **L2:** 30x30 voxel layer with a **0.1 mm voxel size**.  
 - Same 5-axis CNC machine as in the video.  
 
-We leverage **CUDA stream parallelization** for improved performance, achieving the following speed-ups:  
+We leverage **CUDA stream parallelization** for further improved single GPU parallelization performance, achieving the 
+following speed-ups:
+
 - **1 stream: 344499 milliseconds**  
 - **2 streams: 202646 milliseconds**   
 - **4 streams: 198754 milliseconds**   
