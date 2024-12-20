@@ -12,28 +12,10 @@ numerous projects in machine learning, and I frequently serve as a technical lea
 business challenges into innovative AI solutions. Proficient in Python, C++ and GPGPU programming,
 I have a proven track record of delivering impactful AI-driven projects.
 
-
 ## Expertise and Interests: WORK IN PROGRESS
 - **Artificial Intelligence**: Machine learning (Bayesian ML, RL, RAG), generative AI for engineering design.
 - **High-Performance Computing**: CUDA, GPGPU programming, scalable algorithms for simulation.
 - **Physics-Informed AI**: Embedding physical principles into AI models for robust dynamical systems.
-
-## Selected Projects
-
-I have worked on various projects throughout my academic and private sector career. While many of these are confidential, 
-I have selected a few to showcase as examples of my previous work.
-
-- <a href="/ivan-homepage/projects/project_gpu_voxelization">GPU based voxelizer</a> ([link to repo])()
-- <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
-   (private repo for now) 
-- RAG System for Technical Documentation [see white paper](https://www.appliedai.de/en/insights/trustworthy-rag-in-wireless-test-measurement-retrieval-fine-tuning)
-- Offline RL using Tianshou and Minari: WIP
-- ToDo: Simple Agent project: WIP
-
-## Recent Highlights
-- Inventor of EU/US patents for AI-based imaging calibration and HPC algorithms.
-- Developed ML surrogate models that reduced CAD design optimization times from hours to seconds.
-- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies.
 
 ## Professional Timeline
 
@@ -44,7 +26,30 @@ I have selected a few to showcase as examples of my previous work.
   and other leading institutions.
 - **PhD in Theoretical Physics - 2005-2008**: [University of Florence](https://www.fisica.unifi.it/changelang-eng.html) 
 
-## Publications
+
+## Selected Projects
+
+I have worked on various projects throughout my academic and private sector career. While many of these are confidential, 
+I have selected a few to showcase as examples of my previous work.
+
+- <a href="/ivan-homepage/projects/project_gpu_voxelization">GPU based voxelizer</a> - [link to repo](...)
+- <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
+   (private repo for now) 
+- RAG System for Technical Documentation (
+  [appliedAI](https://www.appliedai.de/en/) / [deepset](https://www.deepset.ai/) /
+  [rohde & schwarz](https://www.rohde-schwarz.com/de/startseite_48230.html) collaboration) 
+  [see white paper](https://www.appliedai.de/en/insights/trustworthy-rag-in-wireless-test-measurement-retrieval-fine-tuning)
+- Offline RL using Tianshou and Minari: WIP
+- ToDo: Simple Agent project: WIP
+
+## Recent Highlights
+
+- Inventor of EU/US patents for AI-based imaging calibration and HPC algorithms.
+- Developed ML surrogate models that reduced CAD design optimization times from hours to seconds.
+- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies.
+
+## Selected Publications
+
 1. [Neural-network quantum states and chiral topological states](https://journals.aps.org/prx/pdf/10.1103/PhysRevX.8.011006)
 2. [Evaluation of ranks of entanglement spectra](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.108.256806)
 3. [Entanglement entropy of integer Quantum Hall states](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.80.153303)
