@@ -19,10 +19,16 @@ I have a proven track record of delivering impactful AI-driven projects.
 - **Physics-Informed AI**: Embedding physical principles into AI models for robust dynamical systems.
 
 ## Selected Projects
--  <a href="/ivan-homepage/projects/project_gpu_voxelization">GPU based voxelizer</a>
--  <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
-- [RAG System for Technical Documentation](#)
-- [Advanced HPC for Quantum Simulations](#)
+
+I have worked on various projects throughout my academic and private sector career. While many of these are confidential, 
+I have selected a few to showcase as examples of my previous work.
+
+- <a href="/ivan-homepage/projects/project_gpu_voxelization">GPU based voxelizer</a> ([link to repo])()
+- <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
+   (private repo for now) 
+- RAG System for Technical Documentation [see white paper](https://www.appliedai.de/en/insights/trustworthy-rag-in-wireless-test-measurement-retrieval-fine-tuning)
+- Offline RL using Tianshou and Minari: WIP
+- ToDo: Simple Agent project: WIP
 
 ## Recent Highlights
 - Inventor of EU/US patents for AI-based imaging calibration and HPC algorithms.
