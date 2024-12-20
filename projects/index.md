@@ -8,6 +8,7 @@ permalink: /projects/
 
 ## Innovative GPU-Based Milling/Collision Simulator
 
+---
 ### The Challenge  
 The milling process involves a **sequential dependency**:  
 
@@ -18,39 +19,221 @@ To compute collisions:
 
 **Even with parallel collision detection at a single time step, the sequential nature remains a bottleneck**.
 
+---
+
 ### Existing Solutions  
 
-CAM software typically computes collisions in **time windows**:
+CAM software typically **computes collisions at specific time windows** to speed up the simulation:
 
-- ✅ Speeds up simulations.  
 - ⚠️ Risks **false positives** for collisions.  
-- ⚠️ Produces **suboptimal tool paths**, relying on CAM programmer experience to avoid potential issues.
+- ⚠️ Produces suboptimal tool paths: To avoid potential collisions, CAM programmers often prioritize safety over 
+  efficiency, leading to suboptimal paths. Additionally, significant time is wasted visually inspecting for potential 
+  collisions during time windows.
 
 ---
 
 ### Our Solution
 
-We developed an **innovative, fully parallelizable approach** using a **reduction operation/error-correction method**:  
+We developed an **innovative, fully parallelizable algorithm** using a **reduction operation/error-correction method**:  
 
 - Transforms the sequential \( O(N) \) problem into a **fully parallel** one with complexity \( O(\log N) \).  
 - Implemented entirely on the **GPU** for maximum performance.
 - EU/USA patents granted
+
+Our Approach:
+
+- 🚀 Achieves significant speedup through full-time parallelization using CUDA cores and stream parallelism.
+- 🚀 Enables more optimal tool paths, allowing CAM programmers to focus on path optimization. Collisions are flagged 
+- automatically, specifying the exact time and location of the issue. 
+
+To implement our algorithm, we have developed a milling and collision simulation from scratch using 
+**CUDA/C++** for high-performance computations and a simple rendering visualizer built with **VTK**.
+
+---
+
+## Simulation Overview 🛠️  
+The simulation employs a **two-level voxel model**:  
+- **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
+- **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
+
+<a href="../assets/img/two_level_voxel_model.png" target="_blank">
+  <img src="../assets/img/two_level_voxel_model.png" alt="Click to view full-size image" width="300"/>
+</a>
+
+
+Check out the video below to see it in action! 🎥  
+Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebM Video</title>
+    <title>Image Lightbox Example</title>
+    <style>
+        /* Styles for the container */
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .container img {
+            width: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        /* Lightbox modal styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        /* Close button */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>My WebM Video</h1>
-    <video width="640" height="360" controls>
-        <source src="../assets/videos/cnc_simul.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+    <div class="container">
+        <video width="640" height="360" controls>
+            <source src="../assets/videos/cnc_simul.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <img src="../assets/img/henhis_face.png" alt="Description of the image" width="300" id="thumbnail">
+    </div>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close" id="closeBtn">&times;</span>
+        <img id="lightboxImage" src="" alt="Full-size image">
+    </div>
+    <script>
+        // Get elements
+        const thumbnail = document.getElementById("thumbnail");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const closeBtn = document.getElementById("closeBtn");
+        // When the thumbnail is clicked, open the lightbox
+        thumbnail.addEventListener("click", function() {
+            lightbox.style.display = "flex";
+            lightboxImage.src = thumbnail.src; // Set the lightbox image to be the same as the thumbnail
+        });
+        // When the close button is clicked, close the lightbox
+        closeBtn.addEventListener("click", function() {
+            lightbox.style.display = "none";
+        });
+        // Close the lightbox if the user clicks outside the image
+        window.addEventListener("click", function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
+
+
+The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
+However, our system is capable of handling much more complex cases, such as the one shown in the figure above:  
+
+- **~4 million toolpath positions** simulated on a **laptop with an RTX4060 GPU (8GB)**.  
+- Two-level voxel model:  
+  - **L1:** 20x20 voxel layer.  
+  - **L2:** 30x30 voxel layer with a **0.1 mm voxel size**.  
+- Same 5-axis CNC machine as in the video.  
+
+We leverage **CUDA stream parallelization** for improved performance, achieving the following speed-ups:  
+- **1 stream: 344499 milliseconds**  
+- **2 streams: 202646 milliseconds**   
+- **4 streams: 198754 milliseconds**   
+
+> **Note:** In this example, only the **tool holder** is used for collision detection to manage GPU memory. If the GPU 
+> is overloaded with the full mesh data of all machine surfaces, as this is a small GPU, the limited resources 
+> (e.g., CUDA cores and memory) would force streams to execute sequentially, reducing the benefits of stream 
+> parallelization. This can be seen for 4 streams where the speedup doesn't increase beyond the 2 stream case. 
+> However, with **multiple GPUs**, the full simulation (including all machine surfaces) would again 
+> demonstrate significant stream parallelization speed-ups.  
+
+
+---
+
+## Key Features 🌟  
+
+### Collision Detection  
+The simulation leverages advanced techniques to ensure accurate and efficient collision detection:  
+- **Rigid body collision detection** for each time step.  
+- **GPU-optimized BVH trees** and acceleration techniques to identify potential collision targets.  
+- **Primitive shape intersections**, such as **triangle-voxel**, to detect actual collisions:
+  - Between machine surfaces and the voxelized workpiece.  
+  - Between complex tools and surface primitives.  
+
+### Optimization Strategy  
+Our approach focuses on **time-parallelization**, avoiding traditional bottlenecks:  
+- Unlike traditional CAM solutions that optimize collision detection (a sequential bottleneck), our method 
+- **parallelizes across time steps**.  
+- We refine the **time-parallelization algorithm** for maximum efficiency.
+- The algorithm can use multiple GPUs but also multiple streams within a single GPU for task parallelism in order to
+  speed up our time parallel simulation.
+
+To implement the two-level voxelization, we adopted the method from the paper 
+[Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201).  
+For a simplified version (single-level voxelization), check out my [voxelizer repo](#).  
+
+---
+
+## Advanced Design with Modern C++ 💡  
+
+To achieve a clean, object-oriented design while adhering to **SOLID principles** at the CUDA level:  
+
+- We use **template metaprogramming** to mimic **dependency injection** at compile time.  
+- This approach eliminates runtime overhead while maintaining performance and flexibility.
+
+The code looks like this:
+
+``` cpp
+
+// Given the interface ITwoLevelVoxelModel we will use the implementation TwoLevelModelSimple, i.e. the one used
+// on the examples above. This is the voxel model for the workpiece. 
+
+typedef ITwoLevelVoxelModel<TwoLevelModelSimple> VoxelModel;
+
+
+// IMillingArchitecture is the interface associated with the parallelization type, like multiple GPU time 
+// parallelization 'MillingParallelNcMultiGpu' , i.e. using our algorithm or just a time sequential one 
+// 'MillingSerialNc' as done in standard CAM softwares. 
+
+typedef IMillingArchitecture<MillingParallelNcMultiGpu, VoxelModel> MillingArch;     
+//typedef IMillingArchitecture<MillingSerialNc, VoxelModel> MillingArch;   
+
+
+// IMachineKinematics defines the kinematics of the machine. In the example above we used a 5 axis but it could be 
+// 3+2-axis or 3-axis, etc.
+
+typedef IMachineKinematics<FiveAxisKinematics> MachineKinematics;
+
+
+// Finally we create the Machine to run the simulation
+
+typedef MachineBasic<IMachineKinematics, MillingArch, VoxelModel> MachineBasic;
+```
 
 ---
 
