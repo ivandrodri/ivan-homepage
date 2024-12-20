@@ -102,11 +102,10 @@ Our simulator employs a **two-level voxel model**:
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
-
 <body>
     <!-- Example of how to add images -->
     <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
+        <img src="../assets/img/two_level_voxel_model.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
     </div>
     <!-- Lightbox Modal (only need one) -->
     <div id="lightbox" class="lightbox">
@@ -171,9 +170,43 @@ with collisions highlighted in **red voxels**.
 The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
 However, **our simulator is capable of handling much more complex cases**, such as the one shown below:
 
-<div class="image-container">
-    <img src="../assets/img/henhis_face.png" alt="Your description" class="lightbox-thumbnail">
-</div>
+<body>
+    <!-- Example of how to add images -->
+    <div class="image-container">
+        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
+    </div>
+    <!-- Lightbox Modal (only need one) -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightboxImage" src="" alt="">
+    </div>
+    <script>
+        // Get the lightbox elements
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const closeBtn = document.querySelector(".close");
+        // Add click event to all thumbnails
+        document.querySelectorAll('.lightbox-thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImage.src = this.src;
+                lightboxImage.alt = this.alt;
+            });
+        });
+        // Close lightbox when clicking the close button
+        closeBtn.addEventListener("click", function() {
+            lightbox.style.display = "none";
+        });
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener("click", function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+
+
 
 - **~4 million toolpath positions** simulated on a **laptop with an RTX4060 GPU (8GB)**.  
 - Two-level voxel model:  
