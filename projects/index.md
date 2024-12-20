@@ -26,9 +26,7 @@ To compute collisions:
 CAM software typically **computes collisions at specific time windows** to speed up the simulation:
 
 - ⚠️ Risks **false positives** for collisions.  
-- ⚠️ Produces suboptimal tool paths: To avoid potential collisions, CAM programmers often prioritize safety over 
-  efficiency, leading to suboptimal paths. Additionally, significant time is wasted visually inspecting for potential 
-  collisions during time windows.
+- ⚠️ Produces suboptimal tool paths: To avoid potential collisions, CAM programmers often prioritize safety over efficiency, leading to suboptimal paths. Additionally, significant time is wasted visually inspecting for potential collisions during time windows.
 
 ---
 
@@ -40,14 +38,12 @@ We developed an **innovative, fully parallelizable algorithm** using a **reducti
 - Implemented entirely on the **GPU** for maximum performance.
 - EU/USA patents granted
 
-Our Approach:
+**Our Approach**:
 
 - 🚀 Achieves significant speedup through full-time parallelization using CUDA cores and stream parallelism.
-- 🚀 Enables more optimal tool paths, allowing CAM programmers to focus on path optimization. Collisions are flagged 
-- automatically, specifying the exact time and location of the issue. 
+- 🚀 Enables more optimal tool paths, allowing CAM programmers to focus on path optimization. Collisions are flagged automatically, specifying the exact time and location of the issue. 
 
-To implement our algorithm, we have developed a milling and collision simulation from scratch using 
-**CUDA/C++** for high-performance computations and a simple rendering visualizer built with **VTK**.
+To implement our algorithm, we have developed a milling and collision simulation from scratch using **CUDA/C++** for high-performance computations and a simple rendering visualizer built with **VTK**.
 
 ---
 
@@ -55,7 +51,6 @@ To implement our algorithm, we have developed a milling and collision simulation
 The simulation employs a **two-level voxel model**:  
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
-
 
 
 <html lang="en">
@@ -138,15 +133,7 @@ The simulation employs a **two-level voxel model**:
 </body>
 </html>
 
-
-
-<a href="../assets/img/two_level_voxel_model.png" target="_blank">
-  <img src="../assets/img/two_level_voxel_model.png" alt="Click to view full-size image" width="300"/>
-</a>
-
-
-Check out the video below to see it in action! 🎥  
-Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
+Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
 
 <html lang="en">
 <head>
@@ -173,8 +160,7 @@ Here, a 5-axis CNC machine demonstrates collision detection, with collisions hig
 </html>
 
 
-The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
-However, our system is capable of handling much more complex cases, such as the one shown below:
+The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. However, our system is capable of handling much more complex cases, such as the one shown below:
 
 <html lang="en">
 <head>
@@ -268,13 +254,7 @@ We leverage **CUDA stream parallelization** for improved performance, achieving 
 - **2 streams: 202646 milliseconds**   
 - **4 streams: 198754 milliseconds**   
 
-> **Note:** In this example, only the **tool holder** is used for collision detection to manage GPU memory. If the GPU 
-> is overloaded with the full mesh data of all machine surfaces, as this is a small GPU, the limited resources 
-> (e.g., CUDA cores and memory) would force streams to execute sequentially, reducing the benefits of stream 
-> parallelization. This can be seen for 4 streams where the speedup doesn't increase beyond the 2 stream case. 
-> However, with **multiple GPUs**, the full simulation (including all machine surfaces) would again 
-> demonstrate significant stream parallelization speed-ups.  
-
+> **Note:** In this example, only the **tool holder** is used for collision detection to manage GPU memory. If the GPU is overloaded with the full mesh data of all machine surfaces, as this is a small GPU, the limited resources (e.g., CUDA cores and memory) would force streams to execute sequentially, reducing the benefits of stream  parallelization. This can be seen for 4 streams where the speedup doesn't increase beyond the 2 stream case.  However, with **multiple GPUs**, the full simulation (including all machine surfaces) would again  demonstrate significant stream parallelization speed-ups.  
 
 ---
 
@@ -296,9 +276,7 @@ Our approach focuses on **time-parallelization**, avoiding traditional bottlenec
 - The algorithm can use multiple GPUs but also multiple streams within a single GPU for task parallelism in order to
   speed up our time parallel simulation.
 
-To implement the two-level voxelization, we adopted the method from the paper 
-[Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201).  
-For a simplified version (single-level voxelization), check out my [voxelizer repo](#).  
+To implement the two-level voxelization, we adopted the method from the paper [Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201). For a simplified version (single-level voxelization), check out my [voxelizer repo](#).  
 
 ---
 
