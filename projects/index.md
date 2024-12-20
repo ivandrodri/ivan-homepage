@@ -15,11 +15,15 @@ permalink: /projects/
         .image-container {
             text-align: center;
             margin: 20px;
+            /* Add display: inline-block to prevent unwanted text display */
+            display: inline-block;
         }
         .lightbox-thumbnail {
             width: 300px;
             cursor: pointer;
             transition: transform 0.3s ease;
+            /* Ensure images don't have extra space below */
+            display: block;
         }
         .lightbox {
             display: none;
@@ -49,17 +53,17 @@ permalink: /projects/
     </style>
 </head>
 <body>
-    <!-- Example Image Containers -->
+    <!-- Example of how to add images -->
     <div class="image-container">
-        <img src="../assets/img/two_level_voxel_model.png" alt="Description 1" class="lightbox-thumbnail">
+        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
     </div>
     <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Description 2" class="lightbox-thumbnail">
+        <img src="../assets/img/two_level_voxel_model.png" alt="Two level voxel model" class="lightbox-thumbnail">
     </div>
     <!-- Lightbox Modal (only need one) -->
     <div id="lightbox" class="lightbox">
         <span class="close">&times;</span>
-        <img id="lightboxImage" src="" alt="Full-size image">
+        <img id="lightboxImage" src="" alt="">
     </div>
     <script>
         // Get the lightbox elements
