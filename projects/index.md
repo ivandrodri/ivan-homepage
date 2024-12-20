@@ -4,6 +4,118 @@ title: CNC milling simulation.
 permalink: /projects/
 ---
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video and Image Lightbox Example</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .container img,
+        .container video {
+            width: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img,
+        .lightbox video {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Media Section (Image or Video) -->
+    <div class="container">
+        <!-- This section can be dynamically changed to display either image or video -->
+        <div class="media" data-type="video" data-src="assets/videos/cnc_simul.webm">
+            <video width="640" height="360" controls>
+                <source src="assets/videos/cnc_simul.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="media" data-type="image" data-src="assets/images/henhis_face.png">
+            <img src="assets/images/henhis_face.png" alt="Image" width="300" class="thumbnail">
+        </div>
+    </div>
+    <!-- Lightbox Modal for Media -->
+    <div id="lightbox" class="lightbox">
+        <span class="close" id="closeBtn">&times;</span>
+        <div id="lightboxContent">
+            <!-- Image or Video content will be injected here -->
+        </div>
+    </div>
+    <script>
+        // JavaScript for Lightbox functionality
+        const mediaElements = document.querySelectorAll('.media');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightboxContent');
+        const closeBtn = document.getElementById('closeBtn');
+        // Loop through all media elements (both video and image)
+        mediaElements.forEach(media => {
+            media.addEventListener('click', function() {
+                const type = media.getAttribute('data-type'); // Get media type (image or video)
+                const src = media.getAttribute('data-src'); // Get media source path
+                lightbox.style.display = 'flex';
+                if (type === 'image') {
+                    // If the media is an image, show it in the lightbox
+                    lightboxContent.innerHTML = `<img src="${src}" alt="Full-size image">`;
+                } else if (type === 'video') {
+                    // If the media is a video, show it in the lightbox
+                    lightboxContent.innerHTML = `<video width="640" height="360" controls>
+                                                    <source src="${src}" type="video/webm">
+                                                    Your browser does not support the video tag.
+                                                 </video>`;
+                }
+            });
+        });
+        // Close the lightbox when the close button is clicked
+        closeBtn.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+        });
+        // Close the lightbox if the user clicks outside the media content
+        window.addEventListener('click', function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
 {% include lib/mathjax.html %}
 
 ## Innovative GPU-Based Milling/Collision Simulator
@@ -56,6 +168,11 @@ The simulation employs a **two-level voxel model**:
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
+
+<div class="media" data-type="image" data-src="../assets/img/two_level_voxel_model.png">
+    <img src="../assets/img/two_level_voxel_model.png" alt="Another Image" width="300" class="thumbnail">
+</div>
+
 <a href="../assets/img/two_level_voxel_model.png" target="_blank">
   <img src="../assets/img/two_level_voxel_model.png" alt="Click to view full-size image" width="300"/>
 </a>
@@ -65,90 +182,6 @@ Check out the video below to see it in action! 🎥
 Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Lightbox Example</title>
-    <style>
-        /* Styles for the container */
-        .container {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-        .container img {
-            width: 300px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        /* Lightbox modal styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        /* Close button */
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <video width="640" height="360" controls>
-            <source src="../assets/videos/cnc_simul.webm" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
-        <img src="../assets/img/henhis_face.png" alt="Description of the image" width="300" id="thumbnail">
-    </div>
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="close" id="closeBtn">&times;</span>
-        <img id="lightboxImage" src="" alt="Full-size image">
-    </div>
-    <script>
-        // Get elements
-        const thumbnail = document.getElementById("thumbnail");
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const closeBtn = document.getElementById("closeBtn");
-        // When the thumbnail is clicked, open the lightbox
-        thumbnail.addEventListener("click", function() {
-            lightbox.style.display = "flex";
-            lightboxImage.src = thumbnail.src; // Set the lightbox image to be the same as the thumbnail
-        });
-        // When the close button is clicked, close the lightbox
-        closeBtn.addEventListener("click", function() {
-            lightbox.style.display = "none";
-        });
-        // Close the lightbox if the user clicks outside the image
-        window.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
-</body>
-</html>
 
 
 The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
