@@ -56,41 +56,8 @@ The simulation employs a **two-level voxel model**:
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
-<a href="../assets/img/two_level_voxel_model.png" target="_blank">
-  <img src="../assets/img/two_level_voxel_model.png" alt="Click to view full-size image" width="300"/>
-</a>
 
 
-Check out the video below to see it in action! 🎥  
-Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Section Example</title>
-    <style>
-        /* Styles for the video container */
-        .video-container {
-            text-align: center;
-            margin: 20px;
-        }
-    </style>
-</head>
-<body>
-    <!-- Video Section -->
-    <div class="video-container">
-        <video width="640" height="360" controls>
-            <source src="../assets/videos/cnc_simul.webm" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-</body>
-</html>
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -139,7 +106,7 @@ Here, a 5-axis CNC machine demonstrates collision detection, with collisions hig
 <body>
     <!-- Image Section with Lightbox -->
     <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Description of the image" id="thumbnail">
+        <img src="../assets/img/two_level_voxel_model.png" alt="Two level voxelization model. L1(blue)/L2(white) voxels" id="thumbnail">
     </div>
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
@@ -173,8 +140,122 @@ Here, a 5-axis CNC machine demonstrates collision detection, with collisions hig
 
 
 
+<a href="../assets/img/two_level_voxel_model.png" target="_blank">
+  <img src="../assets/img/two_level_voxel_model.png" alt="Click to view full-size image" width="300"/>
+</a>
+
+
+Check out the video below to see it in action! 🎥  
+Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Section Example</title>
+    <style>
+        /* Styles for the video container */
+        .video-container {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Section -->
+    <div class="video-container">
+        <video width="640" height="360" controls>
+            <source src="../assets/videos/cnc_simul.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</body>
+</html>
+
+
 The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
-However, our system is capable of handling much more complex cases, such as the one shown in the figure above:  
+However, our system is capable of handling much more complex cases, such as the one shown below:
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Lightbox Example</title>
+    <style>
+        /* Styles for the image container */
+        .image-container {
+            text-align: center;
+            margin: 20px;
+        }
+        .image-container img {
+            width: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        /* Lightbox modal styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        /* Close button */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Image Section with Lightbox -->
+    <div class="image-container">
+        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" id="thumbnail">
+    </div>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close" id="closeBtn">&times;</span>
+        <img id="lightboxImage" src="" alt="Full-size image">
+    </div>
+    <script>
+        // Get elements
+        const thumbnail = document.getElementById("thumbnail");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const closeBtn = document.getElementById("closeBtn");
+        // When the thumbnail is clicked, open the lightbox
+        thumbnail.addEventListener("click", function() {
+            lightbox.style.display = "flex";
+            lightboxImage.src = thumbnail.src; // Set the lightbox image to be the same as the thumbnail
+        });
+        // When the close button is clicked, close the lightbox
+        closeBtn.addEventListener("click", function() {
+            lightbox.style.display = "none";
+        });
+        // Close the lightbox if the user clicks outside the image
+        window.addEventListener("click", function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
+
 
 - **~4 million toolpath positions** simulated on a **laptop with an RTX4060 GPU (8GB)**.  
 - Two-level voxel model:  
