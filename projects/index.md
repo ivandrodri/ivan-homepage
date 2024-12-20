@@ -3,8 +3,92 @@ layout: default
 title: CNC milling simulation. 
 permalink: /projects/
 ---
-
 {% include lib/mathjax.html %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Image Lightbox Example</title>
+    <style>
+        .image-container {
+            text-align: center;
+            margin: 20px;
+        }
+        .lightbox-thumbnail {
+            width: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Example Image Containers -->
+    <div class="image-container">
+        <img src="/path/to/image1.jpg" alt="Description 1" class="lightbox-thumbnail">
+    </div>
+    <div class="image-container">
+        <img src="/path/to/image2.jpg" alt="Description 2" class="lightbox-thumbnail">
+    </div>
+    <!-- Lightbox Modal (only need one) -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightboxImage" src="" alt="Full-size image">
+    </div>
+    <script>
+        // Get the lightbox elements
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const closeBtn = document.querySelector(".close");
+        // Add click event to all thumbnails
+        document.querySelectorAll('.lightbox-thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImage.src = this.src;
+                lightboxImage.alt = this.alt;
+            });
+        });
+        // Close lightbox when clicking the close button
+        closeBtn.addEventListener("click", function() {
+            lightbox.style.display = "none";
+        });
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener("click", function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
 
 ## Innovative GPU-Based Milling/Collision Simulator
 
@@ -52,86 +136,9 @@ Our simulator employs a **two-level voxel model**:
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Lightbox Example</title>
-    <style>
-        /* Styles for the image container */
-        .image-container {
-            text-align: center;
-            margin: 20px;
-        }
-        .image-container img {
-            width: 300px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        /* Lightbox modal styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        /* Close button */
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <!-- Image Section with Lightbox -->
-    <div class="image-container">
-        <img src="../assets/img/two_level_voxel_model.png" alt="Two level voxelization model. L1(blue)/L2(white) voxels" id="thumbnail">
-    </div>
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="close" id="closeBtn">&times;</span>
-        <img id="lightboxImage" src="" alt="Full-size image">
-    </div>
-    <script>
-        // Get elements
-        const thumbnail = document.getElementById("thumbnail");
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const closeBtn = document.getElementById("closeBtn");
-        // When the thumbnail is clicked, open the lightbox
-        thumbnail.addEventListener("click", function() {
-            lightbox.style.display = "flex";
-            lightboxImage.src = thumbnail.src; // Set the lightbox image to be the same as the thumbnail
-        });
-        // When the close button is clicked, close the lightbox
-        closeBtn.addEventListener("click", function() {
-            lightbox.style.display = "none";
-        });
-        // Close the lightbox if the user clicks outside the image
-        window.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
-</body>
-</html>
+<div class="image-container">
+    <img src="../assets/img/two_level_voxel_model.png" alt="Your description" class="lightbox-thumbnail">
+</div>
 
 Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine demonstrates collision detection, with collisions highlighted in **red voxels**.
 
@@ -163,86 +170,9 @@ Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine
 The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
 However, **our simulator is capable of handling much more complex cases**, such as the one shown below:
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Lightbox Example</title>
-    <style>
-        /* Styles for the image container */
-        .image-container {
-            text-align: center;
-            margin: 20px;
-        }
-        .image-container img {
-            width: 300px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        /* Lightbox modal styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        /* Close button */
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <!-- Image Section with Lightbox -->
-    <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" id="thumbnail_2">
-    </div>
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
-        <span class="close" id="closeBtn">&times;</span>
-        <img id="lightboxImage" src="" alt="Full-size image">
-    </div>
-    <script>
-        // Get elements
-        const thumbnail_2 = document.getElementById("thumbnail_2");
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const closeBtn = document.getElementById("closeBtn");
-        // When the thumbnail_2 is clicked, open the lightbox
-        thumbnail_2.addEventListener("click", function() {
-            lightbox.style.display = "flex";
-            lightboxImage.src = thumbnail_2.src; // Set the lightbox image to be the same as the thumbnail_2
-        });
-        // When the close button is clicked, close the lightbox
-        closeBtn.addEventListener("click", function() {
-            lightbox.style.display = "none";
-        });
-        // Close the lightbox if the user clicks outside the image
-        window.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
-</body>
-</html>
-
+<div class="image-container">
+    <img src="../assets/img/henhis_face.png" alt="Your description" class="lightbox-thumbnail">
+</div>
 
 - **~4 million toolpath positions** simulated on a **laptop with an RTX4060 GPU (8GB)**.  
 - Two-level voxel model:  
@@ -268,6 +198,8 @@ following speed-ups:
 
 ## Key Features 🌟  
 
+---
+
 ### Collision Detection  
 The simulation leverages advanced techniques to ensure accurate and efficient collision detection:  
 - **Rigid body collision detection** for each time step.  
@@ -275,6 +207,8 @@ The simulation leverages advanced techniques to ensure accurate and efficient co
 - **Primitive shape intersections**, such as **triangle-voxel**, to detect actual collisions:
   - Between machine surfaces and the voxelized workpiece.  
   - Between complex tools and surface primitives.  
+
+---
 
 ### Optimization Strategy  
 Our approach focuses on **time-parallelization**, avoiding traditional bottlenecks:  
@@ -290,7 +224,7 @@ check out my [voxelizer repo](#).
 
 ---
 
-## Template Metaprogramming with CUDA/C++ 💡  
+### Template Metaprogramming with CUDA/C++ 💡  
 
 To achieve a clean, object-oriented design while adhering to the **SOLID principles** at the CUDA level:
 
