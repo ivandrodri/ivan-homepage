@@ -5,34 +5,35 @@ permalink: /projects/
 ---
 {% include lib/mathjax.html %}
 
-## Innovative GPU-Based Milling/Collision Simulator
+# Innovative GPU-Based Milling/Collision Simulator 🚀
 
 ---
 
-### The Challenge 😟
+## The Challenge 😟
 
 The milling process involves a **sequential dependency**:
 
 At each time step ```t = j```, the material shape depends on all previous steps  ```t = 0``` to ```t = j - 1```).
 
-### To compute collisions:
-
-The simulation runs sequentially, leading to a complexity of ```~O(N)```, where ```N ~ 10^6``` for complex shapes.
+**To compute collisions**: A typical simulator runs sequentially, leading to a complexity of ```~O(N)```, where 
+```N ~ 10^6``` for complex shapes.
 
 Even with parallel collision detection at a single time step, the **sequential nature remains a bottleneck**. 😔
 
 ---
 
-### Existing Solutions  
+## Existing Solutions 🛠️  
 
 CAM software typically **computes collisions at specific time windows** to speed up the simulation:
 
 - ⚠️ Risks **false positives** for collisions.  
-- ⚠️ Produces suboptimal tool paths: To avoid potential collisions, CAM programmers often prioritize safety over efficiency, leading to suboptimal paths. Additionally, significant time is wasted visually inspecting for potential collisions during time windows.
+- ⚠️ Produces suboptimal tool paths: To avoid potential collisions, CAM programmers often prioritize safety over 
+  efficiency, leading to suboptimal paths. Additionally, significant time is wasted visually inspecting for potential 
+  collisions during time windows.
 
 ---
 
-### Our Solution
+## Our Solution 💡
 
 We developed an **innovative, fully parallelizable algorithm** using a **reduction operation/error-correction method**:  
 
