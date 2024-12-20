@@ -169,13 +169,14 @@ The simulation employs a **two-level voxel model**:
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
 
-<div class="media" data-type="image" data-src="../assets/img/two_level_voxel_model.png">
-    <img src="../assets/img/two_level_voxel_model.png" alt="Another Image" width="300" class="thumbnail">
-</div>
-
 <a href="../assets/img/two_level_voxel_model.png" target="_blank">
   <img src="../assets/img/two_level_voxel_model.png" alt="Click to view full-size image" width="300"/>
 </a>
+
+<a href="../assets/img/henhis_face.png" target="_blank">
+  <img src="../assets/img/henhis_face.png" alt="Click to view full-size image" width="300"/>
+</a>
+
 
 
 Check out the video below to see it in action! 🎥  
