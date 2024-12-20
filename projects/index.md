@@ -5,52 +5,6 @@ permalink: /projects/
 ---
 {% include lib/mathjax.html %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reusable Image Lightbox Example</title>
-    <style>
-        .image-container {
-            text-align: center;
-            margin: 20px;
-            /* Add display: inline-block to prevent unwanted text display */
-            display: inline-block;
-        }
-        .lightbox-thumbnail {
-            width: 300px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            /* Ensure images don't have extra space below */
-            display: block;
-        }
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-    </style>
-</head>
-
 ## Innovative GPU-Based Milling/Collision Simulator
 
 ---
@@ -102,42 +56,9 @@ Our simulator employs a **two-level voxel model**:
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
-<body>
-    <!-- Example of how to add images -->
-    <div class="image-container">
-        <img src="../assets/img/two_level_voxel_model.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
-    </div>
-    <!-- Lightbox Modal (only need one) -->
-    <div id="lightbox" class="lightbox">
-        <span class="close">&times;</span>
-        <img id="lightboxImage" src="" alt="">
-    </div>
-    <script>
-        // Get the lightbox elements
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const closeBtn = document.querySelector(".close");
-        // Add click event to all thumbnails
-        document.querySelectorAll('.lightbox-thumbnail').forEach(thumbnail => {
-            thumbnail.addEventListener('click', function() {
-                lightbox.style.display = "flex";
-                lightboxImage.src = this.src;
-                lightboxImage.alt = this.alt;
-            });
-        });
-        // Close lightbox when clicking the close button
-        closeBtn.addEventListener("click", function() {
-            lightbox.style.display = "none";
-        });
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
-</body>
-
+<div class="lightbox-image">
+    <img src="../assets/img/two_level_voxel_model.png" alt="Voxel model">
+</div>
 
 Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine demonstrates collision detection, 
 with collisions highlighted in **red voxels**.
@@ -170,42 +91,9 @@ with collisions highlighted in **red voxels**.
 The video demonstrates a simple example with a relatively large L2 voxel size for demonstration purposes. 
 However, **our simulator is capable of handling much more complex cases**, such as the one shown below:
 
-<body>
-    <!-- Example of how to add images -->
-    <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" class="lightbox-thumbnail">
-    </div>
-    <!-- Lightbox Modal (only need one) -->
-    <div id="lightbox" class="lightbox">
-        <span class="close">&times;</span>
-        <img id="lightboxImage" src="" alt="">
-    </div>
-    <script>
-        // Get the lightbox elements
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImage = document.getElementById("lightboxImage");
-        const closeBtn = document.querySelector(".close");
-        // Add click event to all thumbnails
-        document.querySelectorAll('.lightbox-thumbnail').forEach(thumbnail => {
-            thumbnail.addEventListener('click', function() {
-                lightbox.style.display = "flex";
-                lightboxImage.src = this.src;
-                lightboxImage.alt = this.alt;
-            });
-        });
-        // Close lightbox when clicking the close button
-        closeBtn.addEventListener("click", function() {
-            lightbox.style.display = "none";
-        });
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener("click", function(event) {
-            if (event.target === lightbox) {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
-</body>
-
+<div class="lightbox-image">
+    <img src="../assets/img/henhis_face.png" alt="Complex milling/collision simulation">
+</div>
 
 
 - **~4 million toolpath positions** simulated on a **laptop with an RTX4060 GPU (8GB)**.  
@@ -309,3 +197,101 @@ Leverage this high-speed simulator to **optimize toolpaths** further using advan
         Back to Home
     </button>
 </a>
+
+
+
+<!-- Place this code block at the end of your Markdown file -->
+<style>
+    .lightbox-image {
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+    }
+    
+    .lightbox-image img {
+        max-width: 300px;
+        transition: transform 0.3s ease;
+        display: block;
+    }
+    
+    .lightbox-image img:hover {
+        transform: scale(1.05);
+    }
+    
+    #global-lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #global-lightbox img {
+        max-width: 90%;
+        max-height: 90vh;
+        object-fit: contain;
+    }
+    
+    #lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
+
+<!-- Single lightbox container for all images -->
+<div id="global-lightbox">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-current-image" src="" alt="">
+</div>
+
+<script>
+    // Create lightbox container if it doesn't exist
+    if (!document.getElementById('global-lightbox')) {
+        const lightboxHTML = `
+            <div id="global-lightbox">
+                <span id="lightbox-close">&times;</span>
+                <img id="lightbox-current-image" src="" alt="">
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+    }
+
+    // Initialize lightbox functionality
+    function initializeLightbox() {
+        const lightbox = document.getElementById('global-lightbox');
+        const lightboxImage = document.getElementById('lightbox-current-image');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        // Add click handlers to all lightbox images
+        document.querySelectorAll('.lightbox-image img').forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.style.display = 'flex';
+                lightboxImage.src = this.src;
+                lightboxImage.alt = this.alt;
+            });
+        });
+
+        // Close handlers
+        closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.style.display = 'none';
+        });
+    }
+
+    // Initialize when the page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeLightbox);
+    } else {
+        initializeLightbox();
+    }
+</script>
