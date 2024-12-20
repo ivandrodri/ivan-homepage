@@ -48,7 +48,7 @@ To implement our algorithm, we have developed a milling and collision simulation
 ---
 
 ## Simulation Overview 🛠️  
-The simulation employs a **two-level voxel model**:  
+Our simulator employs a **two-level voxel model**:  
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
@@ -210,7 +210,7 @@ The video demonstrates a simple example with a relatively large L2 voxel size fo
 <body>
     <!-- Image Section with Lightbox -->
     <div class="image-container">
-        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" id="thumbnail">
+        <img src="../assets/img/henhis_face.png" alt="Relatively complex milling/collision simulation" id="thumbnail_2">
     </div>
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
@@ -219,14 +219,14 @@ The video demonstrates a simple example with a relatively large L2 voxel size fo
     </div>
     <script>
         // Get elements
-        const thumbnail = document.getElementById("thumbnail");
+        const thumbnail_2 = document.getElementById("thumbnail_2");
         const lightbox = document.getElementById("lightbox");
         const lightboxImage = document.getElementById("lightboxImage");
         const closeBtn = document.getElementById("closeBtn");
-        // When the thumbnail is clicked, open the lightbox
-        thumbnail.addEventListener("click", function() {
+        // When the thumbnail_2 is clicked, open the lightbox
+        thumbnail_2.addEventListener("click", function() {
             lightbox.style.display = "flex";
-            lightboxImage.src = thumbnail.src; // Set the lightbox image to be the same as the thumbnail
+            lightboxImage.src = thumbnail_2.src; // Set the lightbox image to be the same as the thumbnail_2
         });
         // When the close button is clicked, close the lightbox
         closeBtn.addEventListener("click", function() {
