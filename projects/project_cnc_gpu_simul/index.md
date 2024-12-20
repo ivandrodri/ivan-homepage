@@ -1,7 +1,7 @@
 ---
 layout: default
 title: CNC milling simulation. 
-permalink: /projects/
+permalink: /projects/project_cnc_gpu_simul/
 ---
 {% include lib/mathjax.html %}
 
@@ -27,9 +27,9 @@ Even with parallel collision detection at a single time step, the **sequential n
 CAM software typically **computes collisions at specific time windows** to speed up the simulation:
 
 - ⚠️ Risks **false positives** for collisions.  
-- ⚠️ Produces suboptimal tool paths: To avoid potential collisions, CAM programmers often prioritize safety over 
-  efficiency, leading to suboptimal paths. Additionally, significant time is wasted visually inspecting for potential 
-  collisions during time windows.
+- ⚠️ Produces **suboptimal tool paths**: To avoid potential collisions, CAM programmers often prioritize safety over 
+  efficiency, leading to suboptimal paths. Additionally, **significant time is wasted visually inspecting for potential 
+  collisions** during time windows.
 
 ---
 
@@ -37,17 +37,17 @@ CAM software typically **computes collisions at specific time windows** to speed
 
 We developed an **innovative, fully parallelizable algorithm** using a **reduction operation/error-correction method**:  
 
-- Transforms the sequential ```O(N)``` problem into a **fully parallel** one with complexity ```O( log N)```.  
-- Implemented entirely on the **GPU** for maximum performance.
+- Transforms the sequential problem into a **fully parallel** one with complexity ```O( log N)```.  
+- **Implemented entirely on the GPU** for maximum performance.
 - EU/USA patents granted
 
 **Our Approach**:
 
-- 🚀 Achieves significant speedup through full-time parallelization using CUDA cores and stream parallelism.
-- 🚀 Enables more optimal tool paths, allowing CAM programmers to focus on path optimization. Collisions are flagged 
+- 🚀 Achieves **significant speedup through full-time parallelization** using CUDA cores and stream parallelism.
+- 🚀 **Enables more optimal tool paths**, allowing CAM programmers to focus on path optimization. Collisions are flagged 
   automatically, specifying the exact time and location of the issue. 
 
-To implement our algorithm, we have developed a milling and collision simulation from scratch using **CUDA/C++** for 
+To implement our algorithm, **we have developed a milling and collision simulation from scratch using CUDA/C++** for 
 high-performance computations and a simple rendering visualizer built with **VTK**.
 
 ---
@@ -58,7 +58,7 @@ Our simulator employs a **two-level voxel model**:
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
 <div class="lightbox-image">
-    <img src="../assets/img/two_level_voxel_model.png" alt="Voxel model">
+    <img src="../../assets/img/two_level_voxel_model.png" alt="Voxel model">
 </div>
 
 Check out the video below to see it in action! 🎥 . Here, a 5-axis CNC machine demonstrates collision detection, 
@@ -81,7 +81,7 @@ with collisions highlighted in **red voxels**.
     <!-- Video Section -->
     <div class="video-container">
         <video width="340" height="360" controls>
-            <source src="../assets/videos/cnc_simul.webm" type="video/webm">
+            <source src="../../assets/videos/cnc_simul.webm" type="video/webm">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -93,7 +93,7 @@ The video demonstrates a simple example with a relatively large L2 voxel size fo
 However, **our simulator is capable of handling much more complex cases**, such as the one shown below:
 
 <div class="lightbox-image">
-    <img src="../assets/img/henhis_face.png" alt="Complex milling/collision simulation">
+    <img src="../../assets/img/henhis_face.png" alt="Complex milling/collision simulation">
 </div>
 
 
