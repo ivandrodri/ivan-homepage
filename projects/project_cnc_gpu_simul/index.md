@@ -39,7 +39,7 @@ We developed an **innovative, fully parallelizable algorithm** using a **reducti
 
 - Transforms the sequential problem into a **fully parallel** one with complexity ```O( log N)```.  
 - **Implemented entirely on the GPU** for maximum performance.
-- EU/USA patents granted
+- **EU/USA patents granted** 
 
 **Our Approach**:
 
@@ -72,8 +72,8 @@ with collisions highlighted in **red voxels**.
     <style>
         /* Styles for the video container */
         .video-container {
-            text-align: center;
-            margin: 20px;
+            text-align: left;
+            margin: 0px;
         }
     </style>
 </head>
