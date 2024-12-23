@@ -9,13 +9,16 @@ in academia.
 I am an experienced AI engineer with deep expertise in artificial intelligence, software development,
 and high-performance computing (HPC), gained from both academia and the private sector. I have led
 numerous projects in machine learning, and I frequently serve as a technical lead, translating complex
-business challenges into innovative AI solutions. Proficient in Python, C++ and GPGPU programming,
+business challenges into innovative AI solutions. Proficient in Python, C++, and CUDA GPGPU programming,
 I have a proven track record of delivering impactful AI-driven projects.
 
-## Expertise and Interests: WORK IN PROGRESS
-- **Artificial Intelligence**: Machine learning (Bayesian ML, RL, RAG), generative AI for engineering design.
-- **High-Performance Computing**: CUDA, GPGPU programming, scalable algorithms for simulation.
-- **Physics-Informed AI**: Embedding physical principles into AI models for robust dynamical systems.
+## Expertise and Interests:
+
+I am passionate about various fields of Machine Learning, particularly Deep Learning, Bayesian Machine Learning, 
+Reinforcement Learning (RL) and surrogate models to speed up complex physics simulations. 
+I am also interested in leveraging large language models (LLMs) and transformers in areas such as Retrieval-Augmented 
+Generation (RAG), generative AI for engineering design, and techniques like Imitation Learning or Behavioral Cloning.
+
 
 ## Professional Timeline
 
@@ -32,6 +35,7 @@ I have a proven track record of delivering impactful AI-driven projects.
 I have worked on various projects throughout my academic and private sector career. While many of these are confidential, 
 I have selected a few to showcase as examples of my previous work.
 
+- <a href="/ivan-homepage/projects/offline_rl/Offline_RL_theory.ipynb">Offline RL using Tianshou and Minari (WIP)</a> - [link to repo](...)
 - <a href="/ivan-homepage/projects/project_gpu_voxelization">GPU based voxelizer</a> - [link to repo](...)
 - <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
    (private repo for now) 
@@ -39,8 +43,6 @@ I have selected a few to showcase as examples of my previous work.
   [appliedAI](https://www.appliedai.de/en/) / [deepset](https://www.deepset.ai/) /
   [rohde & schwarz](https://www.rohde-schwarz.com/de/startseite_48230.html) collaboration) 
   [see white paper](https://www.appliedai.de/en/insights/trustworthy-rag-in-wireless-test-measurement-retrieval-fine-tuning)
-- Offline RL using Tianshou and Minari: WIP
-- ToDo: Simple Agent project: WIP
 
 ## Recent Highlights
 
