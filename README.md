@@ -35,7 +35,7 @@ Generation (RAG), generative AI for engineering design, and techniques like Imit
 I have worked on various projects throughout my academic and private sector career. While many of these are confidential, 
 I have selected a few to showcase as examples of my previous work.
 
-- <a href="/ivan-homepage/projects/offline_rl/Offline_RL_theory.ipynb">Offline RL using Tianshou and Minari (WIP)</a> - [link to repo](...)
+- <a href="https://github.com/ivandrodri/ivan-homepage.git/projects/offline_rl/Offline_RL_theory.ipynb">Offline RL using Tianshou and Minari (WIP)</a> - [link to repo](...)
 - <a href="/ivan-homepage/projects/project_gpu_voxelization">GPU based voxelizer</a> - [link to repo](...)
 - <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
    (private repo for now) 
