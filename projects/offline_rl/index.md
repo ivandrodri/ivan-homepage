@@ -10,7 +10,7 @@ permalink: /projects/offline_rl/
 A playground for experimenting with offline Reinforcement Learning (RL) and Imitation Learning (IL) algorithms.
 This project leverages [Tianshou](https://github.com/thu-ml/tianshou) for RL implementation and 
 [Minari](https://github.com/Farama-Foundation/Minari) for standardized offline RL dataset management. Give a look to the 
-[repository](...) for more details. 📚
+[repository](https://github.com/ivandrodri/offline-rl.git)  or to the html [notebooks](https://ivandrodri.github.io/offline-rl/index.html) for more details. 📚
 
 ## Key Concepts: Online vs Offline RL 🧠
 The fundamental difference between online and offline RL lies in their learning approaches:
@@ -26,9 +26,9 @@ The fundamental difference between online and offline RL lies in their learning 
 - Comprehensive notebooks for learning and experimentation
 
 ## Getting Started 🏁
-Explore the [notebooks](link-to-notebooks) that demonstrate how to use the library. These notebooks focus on core 
-concepts in offline RL, utilizing so far 2D grid environments. These simplified environments provide an ideal learning 
-ground as they:
+Explore the [notebooks](https://ivandrodri.github.io/offline-rl/index.html) that demonstrate how to use the library. 
+These notebooks focus on core concepts in offline RL, utilizing so far 2D grid environments. These simplified 
+environments provide an ideal learning ground as they:
 - 🕒 Enable rapid data collection and training.
 - 🔍 Provide a clear and detailed examination of state-action pairs, making it easier to identify out of distribution data,
   a critical aspect of Offline RL.
@@ -74,7 +74,7 @@ TORCS (The Open Racing Car Simulator) is a highly detailed racing simulator with
 accounting for aerodynamics, wheel rotation, and more. For AI research, TORCS facilitates the addition of independent
 AI controllers via UDP connections, enabling realistic autonomous driving experiments.
 
-<img src="../../assets/img/93_TORCS_simulator.png" alt="TORCS Simulator" width=60%>
+<img src="../../assets/img/93_TORCS_simulator.png" alt="TORCS Simulator" width="60%">
 
 ---
 
@@ -82,7 +82,7 @@ AI controllers via UDP connections, enabling realistic autonomous driving experi
 
 Remember what we need to do:
 
-<img src="../../assets/img/93_DAGGER.jpg" alt="TORCS Simulator" width=60%>
+<img src="../../assets/img/93_DAGGER.jpg" alt="TORCS Simulator" width="60%">
 
 
 ### 1. Expert Driver
@@ -181,7 +181,8 @@ after just 4 laps we are able to learn the expert policy, as shown in the next v
 DAgger is a powerful algorithm, but it requires access to an expert, which can be very costly. Offline RL aims to 
 achieve a similar goal; however, if certain state-action pairs are missing from your dataset, it becomes challenging 
 for the algorithm to infer or recreate them. In Offline RL, the goal is to go out of distribution in a controlled 
-manner. For more details, refer to the notebooks in the repository. 
+manner. For more details, refer to the [notebooks](https://ivandrodri.github.io/offline-rl/index.html) in the 
+repository. 
 
 Since the data collected in the previous exercise is quite bad, this example will be particularly challenging for 
 Offline RL. You should try to collect a better-quality dataset to improve performance.
