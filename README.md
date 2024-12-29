@@ -32,7 +32,7 @@ Generation (RAG), generative AI for engineering design, and techniques like Imit
 
 ## Selected Projects
 
-I have worked on various projects throughout my academic and private sector career. While many of these are confidential, 
+I have worked on many cool projects throughout my academic and private sector career. While many of these are confidential, 
 I have selected a few to showcase as examples of my previous work.
 
 - <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> - [link to repo](https://github.com/ivandrodri/offline-rl.git)
