@@ -64,8 +64,7 @@ See my full [Google Scholar Profile](https://scholar.google.com/citations?hl=en&
 
 ## Contact
 - 📧 Email: [ivandiegorodriguez@gmail.com](mailto:ivandiegorodriguez@gmail.com)
-- 💼 LinkedIn: [...](#)
-- 📂 GitHub: [...](#)
+- 💼 [LinkedIn](https://www.linkedin.com/in/ivan-rodriguez-86a45376/)
 
 ---
 
