@@ -176,13 +176,13 @@ typedef IMillingArchitecture<MillingParallelNcMultiGpu, VoxelModel> MillingArch;
 it could also be a 3+2-axis or 3-axis machine, etc.
 
 ``` cpp
-typedef IMachineKinematics<FiveAxisKinematics> MachineKinematics;
+typedef IMachineKinematics<FiveAxisKinematics> FiveAxisKinematics;
 ```
 
 Finally, we create the Machine to run the simulation.
 
 ``` cpp
-typedef MachineBasic<IMachineKinematics, MillingArch, VoxelModel> MachineBasic;
+typedef Machine<FiveAxisKinematics, MillingArch, VoxelModel> FiveAxisMachine;
 ```
 
 ---
