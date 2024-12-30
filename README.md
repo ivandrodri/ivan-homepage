@@ -35,9 +35,10 @@ Generation (RAG), generative AI for engineering design, and techniques like Imit
 I have worked on many cool projects throughout my academic and private sector career. While many of these are confidential, 
 I have selected a few to showcase as examples of my previous work.
 
-- <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> - [link to repo](https://github.com/ivandrodri/offline-rl.git)
+- <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> - 
+  [link to repo](https://github.com/ivandrodri/offline-rl.git) - [link to html notebooks](https://ivandrodri.github.io/offline-rl/index.html)
 - <a href="https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization">GPU based voxelizer</a> - 
-  [link to repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git) - [link to html notebooks](https://ivandrodri.github.io/offline-rl/index.html)
+  [link to repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git)
 - <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
    (private repo for now) 
 - RAG System for Technical Documentation (
@@ -47,11 +48,13 @@ I have selected a few to showcase as examples of my previous work.
 
 ## Recent Highlights
 
-- Inventor of EU/US patents for AI-based imaging calibration and HPC algorithms.
+- Inventor of EU and US patents, including AI-driven imaging calibration technologies for electron microscopy and 
+  high-speed milling collision detection simulations in CNC manufacturing for process optimization.
 - Developed ML surrogate models that reduced CAD design optimization times from hours to seconds.
-- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies.
+- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies 
+ [link1](https://transferlab.ai/trainings/intro-rl/) - [link2](https://transferlab.ai/trainings/bayesian-ml-intro/).
 
-## Selected Publications
+## Selected Physic Publications
 
 1. [Neural-network quantum states and chiral topological states](https://journals.aps.org/prx/pdf/10.1103/PhysRevX.8.011006)
 2. [Evaluation of ranks of entanglement spectra](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.108.256806)
@@ -62,8 +65,8 @@ See my full [Google Scholar Profile](https://scholar.google.com/citations?hl=en&
 
 ## Contact
 - 📧 Email: [ivandiegorodriguez@gmail.com](mailto:ivandiegorodriguez@gmail.com)
-- 💼 LinkedIn: [linkedin.com/in/dr-ivan-rodriguez](#)
-- 📂 GitHub: [github.com/ivanrodri2020](#)
+- 💼 LinkedIn: [...](#)
+- 📂 GitHub: [...](#)
 
 ---
 
