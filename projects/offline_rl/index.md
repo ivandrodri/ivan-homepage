@@ -227,11 +227,7 @@ minimize the reward penalty.
 In this case, our reward is a penalty if any of the lidar sensors detect an imminent collision.
 
 As shown in the video below, after just one epoch, the offline RL algorithm successfully learned to create the 
-missing state-action pairs, enabling it to navigate the curve quite well. As mentioned earlier, the policy will 
-#continue to improve with additional training. However, if there is a significant gap between the optimal 
-state-action pairs and the collected ones, this poses a considerable challenge. In such cases, the most practical 
-approach would be to return to the initial stage and collect higher-quality data in those specific regimes.
-
+missing state-action pairs, enabling it to navigate the curve quite well. 
 
 <html lang="en">
 <head>
@@ -257,11 +253,18 @@ approach would be to return to the initial stage and collect higher-quality data
 </body>
 </html>
 
+As mentioned earlier, the policy will continue to improve with additional training. However, if there is a significant 
+gap between the optimal state-action pairs and the collected ones, this poses a considerable challenge. In such cases, 
+the most practical approach would be to return to the initial stage and collect higher-quality data in those specific 
+regimes.
 
 ---
 
 ## Future Work
-- Expand the library to include additional high-dimensional environments.
+- Expand the library to include additional high-dimensional environments, such as robotic hand manipulations or 
+  multi-task robotic scenarios, where data is collected for Task A but used in an offline RL setting to solve Task B 
+  (assuming Task A is representative enough to cover many state-action pairs of Task B). This situation is quite common 
+  in real-world applications.
 - Explore Imitation Learning/ Offline RL with transformers like architectures.
 
 Stay tuned for updates, and feel free to explore the repository and contribute to this evolving Offline RL Lab!

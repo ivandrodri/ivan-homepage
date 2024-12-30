@@ -37,8 +37,7 @@ I have selected a few to showcase as examples of my previous work.
 
 - <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> - 
   [link to repo](https://github.com/ivandrodri/offline-rl.git) - [link to html notebooks](https://ivandrodri.github.io/offline-rl/index.html)
-- <a href="https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization">GPU based voxelizer</a> - 
-  [link to repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git)
+- GPU based voxelizer - [link to repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git)
 - <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
    (private repo for now) 
 - RAG System for Technical Documentation (
