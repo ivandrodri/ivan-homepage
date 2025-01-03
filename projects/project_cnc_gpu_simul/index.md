@@ -11,12 +11,11 @@ permalink: /projects/project_cnc_gpu_simul/
 
 ## The Challenge 😟
 
-The milling process involves a **sequential dependency**:
-
-At each time step ```t = j```, the material shape depends on all previous steps  ```t = 0``` to ```t = j - 1```).
+A milling process involves a **sequential dependency** on a set of ```N``` toolpath coordinates: at each time step 
+```t = j```, the material shape depends on all previous steps  ```t = 0``` to ```t = j - 1```).
 
 **To compute collisions**: A typical simulator runs sequentially, leading to a complexity of ```~O(N)```, where 
-```N ~ 10^6``` for complex shapes.
+```N ~ 10^6``` for relatively complex shapes.
 
 Even with parallel collision detection at a single time step, the **sequential nature remains a bottleneck**. 😔
 
@@ -53,7 +52,8 @@ high-performance computations and a simple rendering visualizer built with **VTK
 ---
 
 ## Simulation Overview 🛠️  
-Our simulator employs a **two-level voxel model**:  
+Our simulator employs a **two-level voxel model** (check my [voxelizer repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization)
+for a single-level implementation):  
 - **L1**: Coarse-grained voxelization for efficient broad-phase detection (big blue voxels).  
 - **L2**: Fine-grained voxelization for detailed collision resolution (small withe voxels).
 
@@ -143,7 +143,7 @@ Our approach focuses on **time-parallelization**, avoiding traditional bottlenec
 
 To implement the two-level voxelization, we adopted the method from the paper 
 [Fast parallel surface and solid voxelization on GPUs](https://dl.acm.org/doi/abs/10.1145/1882261.1866201). For a simplified version (single-level voxelization), 
-check out my [voxelizer repo](#).  
+check out my [voxelizer repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization).  
 
 ---
 
