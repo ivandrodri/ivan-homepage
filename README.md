@@ -45,6 +45,11 @@ I have selected a few to showcase as examples of my previous work.
   [rohde & schwarz](https://www.rohde-schwarz.com/de/startseite_48230.html) collaboration) 
   [see white paper](https://www.appliedai.de/en/insights/trustworthy-rag-in-wireless-test-measurement-retrieval-fine-tuning)
 
+## Personal Notes on Machine Learning Topics
+
+- <a href="/ivan-homepage/projects/dropout_bayes_notes">Notes on dropout as Bayesian approximation</a>
+
+
 ## Recent Highlights
 
 - Inventor of EU and US patents, including AI-driven imaging calibration technologies for electron microscopy and 
