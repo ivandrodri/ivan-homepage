@@ -4,4 +4,4 @@ title: CNC milling simulation.
 permalink: /projects/laplace_approximation/
 ---
 
-[link](../../docs/_build)
+[link](../../docs/test)
