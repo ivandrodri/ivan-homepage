@@ -7,4 +7,4 @@ permalink: /projects/laplace_approximation
 HELLO
 
 # Laplace Approximation Exercise
-<meta http-equiv="Refresh" content="0; url=./_build/_page/Laplace_exercise/html/Laplace_exercise.html" />
+
