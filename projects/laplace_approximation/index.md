@@ -1,1 +1,1 @@
-[Laplace](https://ivandrodri.github.io/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html)
+[Laplace](https://github.com/ivandrodri/ivan-homepage/blob/main/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html)
