@@ -51,7 +51,7 @@ I have selected a few to showcase as examples of my previous work.
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
 - <a href="/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html">Nuevo intento</a>
 
-- [bla](/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html)
+- [bla](/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/)
 
 ## Recent Highlights
 

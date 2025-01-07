@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Laplace Approximation Exercise
+permalink: /projects/laplace_approximation/_build/_page/Laplace_exercise/html/
 ---
 
 # Laplace Approximation Exercise
-
-The Jupyter Book for this exercise is available [here](./index.html).
+<meta http-equiv="Refresh" content="0; url=Laplace_exercise.html" />
