@@ -1,4 +1,3 @@
-<!-- Create an index.md file -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
 </head>
 <body>
     <iframe 
-        src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://github.com/ivandrodri/ivan-homepage/blob/main/assets/docs/Dropout_as_bayesian_approx_talk.pdf"
+        src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://ivandrodri.github.io/ivan-homepage/assets/docs/Dropout_as_bayesian_approx_talk.pdf"
         width="100%" 
         height="100%" 
         style="border: none; position: absolute; top: 0; left: 0;">
