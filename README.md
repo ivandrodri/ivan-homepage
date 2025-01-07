@@ -49,10 +49,8 @@ I have selected a few to showcase as examples of my previous work.
 
 - [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
-- <a href="/ivan-homepage/assets/laplace_approximation/_build/_page/Laplace_exercise/html">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
-- <a href="/ivan-homepage/assets/laplace_approximation/_build/_page/Laplace_exercise/html">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
-- <a href="ivan-homepage/assets/laplace_approximation/_build/_page/Laplace_exercise/html">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
-- <a href="assets/laplace_approximation/_build/_page/Laplace_exercise/html">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
+- [Bayesian Deep Neural Networks through SVI and Laplace approximation](https://ivandrodri.github.io/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/laplace_exercise.html)
+
 ## Recent Highlights
 
 - Inventor of EU and US patents, including AI-driven imaging calibration technologies for electron microscopy and 
