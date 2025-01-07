@@ -47,8 +47,10 @@ I have selected a few to showcase as examples of my previous work.
 
 ## Personal Notes on Machine Learning Topics
 
-- <a href="/ivan-homepage/projects/dropout_bayes_notes">Notes on dropout as Bayesian approximation</a>
-[Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
+- [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
+- [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
+- <a href="/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
+- <a href="/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
 
 ## Recent Highlights
 
