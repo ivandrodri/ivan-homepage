@@ -49,7 +49,9 @@ I have selected a few to showcase as examples of my previous work.
 
 - [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
-- [bla](projects/laplace_approximation/_build/_page/Laplace_exercise/html)
+- <a href="/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html">Nuevo intento</a>
+
+- [bla](/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html)
 
 ## Recent Highlights
 
