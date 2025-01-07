@@ -51,6 +51,7 @@ I have selected a few to showcase as examples of my previous work.
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
 - [Laplace Exercise_test](https://raw.githubusercontent.com/ivandrodri/ivan-homepage/main/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html) 
 - [Laplace 2](https://github.com/ivandrodri/ivan-homepage/blob/main/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html)
+- [Laplace 3](https://ivandrodri.github.io/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html)
 
 
 - <a href="/ivan-homepage/assets/laplace_approximation/_build/_page/Laplace_exercise/html">Bayesian Deep Neural Networks through SVI and Laplace approximation</a>
