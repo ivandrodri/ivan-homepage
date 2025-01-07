@@ -49,7 +49,7 @@ I have selected a few to showcase as examples of my previous work.
 
 - [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
-- [Laplace Exercise_test](https://raw.githubusercontent.com/ivandrodri/ivan-homepage/main/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html) 
+- <a href="/ivan-homepage/projects/laplace_approximation"> Laplace_trial </a>
 - [Laplace 2](https://github.com/ivandrodri/ivan-homepage/blob/main/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html)
 - [Laplace 3](https://ivandrodri.github.io/ivan-homepage/projects/laplace_approximation/_build/_page/Laplace_exercise/html/index.html)
 
