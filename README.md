@@ -48,7 +48,7 @@ I have selected a few to showcase as examples of my previous work.
 ## Personal Notes on Machine Learning Topics
 
 - <a href="/ivan-homepage/projects/dropout_bayes_notes">Notes on dropout as Bayesian approximation</a>
-
+[Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 
 ## Recent Highlights
 
