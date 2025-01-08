@@ -49,7 +49,7 @@ I have selected a few to showcase as examples of my previous work.
 
 - [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
-- <a href="/ivan-homepage/html">Nuevo intento</a>
+- <a href="/ivan-homepage/html/index.html">Nuevo intento 2</a>
 
 ## Recent Highlights
 
