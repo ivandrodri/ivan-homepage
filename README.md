@@ -49,7 +49,6 @@ I have selected a few to showcase as examples of my previous work.
 
 - [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
-- <a href="/ivan-homepage/projects/laplace_approximation/Laplace_exercise">Bayesian Deep Neural Networks with SVI and Laplace approximation</a>
 - [Bayesian Deep Neural Networks with SVI and Laplace approximation](projects/laplace_approximation)
 
 ## Recent Highlights
