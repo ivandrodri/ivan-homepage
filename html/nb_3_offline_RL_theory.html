@@ -1,0 +1,885 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Offline RL theory &#8212; Offline Reinforcement Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/configmacros"]}, "tex": {"packages": {"[+]": ["configmacros"]}, "macros": {"vect": ["{\\mathbf{\\boldsymbol{#1}} }", 1], "E": "{\\mathbb{E}}", "P": "{\\mathbb{P}}", "R": "{\\mathbb{R}}", "abs": ["{\\left| #1 \\right|}", 1], "simpl": ["{\\Delta^{#1} }", 1], "amax": "{\\text{argmax}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nb_3_offline_RL_theory';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Exercise: Offline RL algorithms" href="nb_4_Offline_rl_exercises.html" />
+    <link rel="prev" title="Exercise: Minari data collection" href="nb_2_data_dollection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Offline Reinforcement Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Offline RL Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nb_0_IntroOfflineRL.html">Introduction to Offline Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_1_offline_RL_dataset_libraries.html">Open Source Datasets libraries for offline RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_2_data_dollection.html">Exercise: Minari data collection</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Offline RL theory</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="nb_4_Offline_rl_exercises.html">Exercise: Offline RL algorithms</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/nb_3_offline_RL_theory.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Offline RL theory</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Offline RL theory</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-issues">Main issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-out-of-distribution-issues">Addressing out of distribution issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-policy-constraint-methods">I - Policy constraint methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-non-implicit-or-direct">a) Non-implicit or Direct</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-implicit">b) Implicit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-policy-regularization-methods">II - Policy Regularization methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-short-review-of-some-popular-offline-rl-algorithms">Appendix: Short review of some popular offline RL algorithms</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-constrained-deep-q-learning-bcq-algorithm">Batch Constrained deep Q-learning (BCQ) algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conservative-q-learning-cql-algorithm">Conservative Q-Learning (CQL) algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-q-learning-iql-algorithm">Implicit Q-Learning (IQL) algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-transformer">Q-Transformer</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">set_random_seed</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="offline-rl-theory">
+<h1>Offline RL theory<a class="headerlink" href="#offline-rl-theory" title="Permalink to this heading">#</a></h1>
+<section id="main-issues">
+<h2>Main issues<a class="headerlink" href="#main-issues" title="Permalink to this heading">#</a></h2>
+<p>Can techniques from online RL, known for solving complex problems effectively, be applied to offline RL?</p>
+<img src="_static/images/nb_94_on_policy_vs_off_policy.png" alt="offline_rl" style="width:60%">
+<div class="slide title"> On-policy vs. off-policy approaches.
+</div><p>In off-policy online RL, we use a replay buffer to store <span class="math notranslate nohighlight">\((state, action, reward)\)</span> data, updating it as the learned policy improves. Why not apply an off-policy algorithm, filling the replay buffer directly with collected data.</p>
+<img src="_static/images/nb_94_off_policy_vs_offline.png" alt="offline_rl" style="width:70%">
+<p><strong>This is just a qualitative parallelism, and offline RL will work even if the data in your replay buffer is far from optimal.</strong></p>
+<p><strong>However, even though both approaches seem similar, off-policy methods won’t be able to work with collected data directly.</strong></p>
+<p><strong>A bit of review:</strong></p>
+<p>In particular many off-policy RL algorithms make use of the following approach:</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat Q}^{k+1} \leftarrow L_1 = \arg \min_Q \mathbb{E}_{(s,a,s')\sim D} \left[\left( Q_\phi(s, a) - r(s, a) - \gamma \mathbb{E}_{a' \sim\pi_\theta(a'|s')}[Q_\phi(s', a')] \right)^2 \right]  \tag{Evaluation}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pi_{k+1} \leftarrow L_2 = \arg \max_{\pi} \mathbb{E}_{s\sim D} \left[ \mathbb{E}_{a \sim\pi_\theta(a|s)} Q^{k+1}_\phi(s, a) \right] \tag{Improvement}
+\]</div>
+<p>with:</p>
+<div class="math notranslate nohighlight">
+\[ 
+Q^\pi(s, a) = \mathbb{E}_\pi \left[ r_0 + \gamma r_1 + \gamma^2 r_2 + \ldots \mid s_0 = s, a_0 = a \right]
+\tag{Q-value}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> is the replay buffer, which in the offline RL case will be filled with the collected dataset.</p>
+<p><strong>As seen in the (Evaluation) step, the only potential out-of-distribution (o.o.d) issue arises when computing action <span class="math notranslate nohighlight">\(a'\)</span>, as all other values (<span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(s'\)</span>) are from the dataset <span class="math notranslate nohighlight">\(D\)</span>.</strong></p>
+<img src="_static/images/nb_94_q_value.png" alt="offline_rl" style="height:200px;">
+<p>If during the evaluation loop:</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat Q}^{k+1} \leftarrow L_1 = \arg \min_Q \mathbb{E}_{(s,a,s')\sim D} \left[\left( Q_\phi(s, a) - r(s, a) - \gamma \mathbb{E}_{a' \sim\pi_\theta(a'|s')}[Q_\phi(s', a')] \right)^2 \right]  \tag{Evaluation}
+\]</div>
+<p>the policy, <span class="math notranslate nohighlight">\(\pi_\theta(.|s)\)</span>, samples o.o.d. actions like <span class="math notranslate nohighlight">\(a'_4\)</span> in the figure, as we don’t know the rewards on o.o.d. regions, <span class="math notranslate nohighlight">\(Q(s',a'_4)\)</span>, would be unpredictable.</p>
+<img src="_static/images/94_dqn_ood_case.png" alt="offline_rl" style="width:50%; display: block; margin-top: 0; padding-top: 0;">
+<p>If by chance, <span class="math notranslate nohighlight">\(Q(s',a'_4)\)</span>, is higher than that of in-distribution actions like, <span class="math notranslate nohighlight">\(a'_0, a'_1, a'_2\)</span>, this overestimated misinformation will propagate into the improvement step:</p>
+<div class="math notranslate nohighlight">
+\[
+\pi_{k+1} \leftarrow L_2 = \arg \max_{\pi} \mathbb{E}_{s\sim D} \left[ \mathbb{E}_{a \sim\pi_\theta(a|s)} Q^{k+1}_\phi(s, a) \right] \tag{Improvement}
+\]</div>
+<p>as, during improvement, we try to find the policy that maximizes <span class="math notranslate nohighlight">\(Q(s,a)\)</span>. Therefore, the policy will have a tendency to go o.o.d. quite often.</p>
+<p><strong>This could be catastrophic during inference!!</strong></p>
+<p>The figure below illustrates the problem of overestimating Q-values in the off-policy Soft Actor Critic (SAC) algorithm on the half-cheetah environment.</p>
+<img src="_static/images/94_offpolicy_Q_values_overestimation.png" alt="offline_rl" style="width:70%">
+<p><strong>In online RL, overestimation is addressed through exploration, which is not possible in offline methods</strong></p>
+<p><strong>Note: If we replace <span class="math notranslate nohighlight">\(a'\)</span> with the dataset value in the evaluation step, we would learn <span class="math notranslate nohighlight">\(Q^\beta(s,a)\)</span>, the Q-value of the behavior policy. However, this would lead to the learned policy in the improvement step being generally far from optimal, especially when dealing with suboptimal data as is common in real scenarios.</strong></p>
+<p><strong>The other important aspect of the offpolicy method introduced earlier is that it implements a dynamic programming approach that is responsible for implementing the “stitching” property, which is crucial for connecting suboptimal trajectories into optimal ones</strong>.</p>
+<img src="_static/images/nb_94_stitching_property.png" alt="offline_rl" style="width:40%"><section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Off-policy methods are strong candidates for offline RL. They assume a replay buffer, and if they implement a dynamic programming approach, they are suited to combine pieces of different trajectories into a new, better one.</p></li>
+<li><p>However, they suffer from the overestimation problem when applied to data, which can cause the algorithm to easily go out of distribution.</p></li>
+</ul>
+<p><strong>Let’s go to the exercises in nb_95</strong></p>
+</section>
+</section>
+<section id="addressing-out-of-distribution-issues">
+<h2>Addressing out of distribution issues<a class="headerlink" href="#addressing-out-of-distribution-issues" title="Permalink to this heading">#</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h3>
+<p><strong>The idea is to constraint the learned policy “to be close” to the behavioral one while still introducing a controlled distributional shift to enhance the policy without going out of distribution. This balancing act is a significant challenge and a focus of ongoing RL research.</strong></p>
+<img src="_static/images/nb_94_distributional_shift.png" alt="KL divergence" width=40%><p>In other words, <strong>you want the learned and behavioral policies to differ on <span class="math notranslate nohighlight">\(D\)</span>; for example, we don’t want to exclude state-action pairs that may appear infrequently (few expert data) but could lead to higher-reward trajectories</strong>, especially considering that these states may likely appear during inference (see figs. a-b).</p>
+<img src="_static/images/nb_94_ood_examples.png" alt="KL divergence" width=80%>
+<p>But at the same time, <strong>we also want the policies to be close enough near to o.o.d. regions for the reasons already discussed</strong> (fig-c).</p>
+<p><strong>Note</strong>: This type of control over missing and o.o.d. data is something that cannot be achieved with imitation learning.</p>
+<p>To attain the aforementioned goals, offline RL algorithms can be classified into three primary categories:</p>
+<p><strong>I - Policy constraint</strong></p>
+<p><strong>II - Policy Regularization</strong></p>
+<p><strong>III - Importance sampling</strong></p>
+</section>
+<section id="i-policy-constraint-methods">
+<h3>I - Policy constraint methods<a class="headerlink" href="#i-policy-constraint-methods" title="Permalink to this heading">#</a></h3>
+<p>One option we have to encourage to copy the expert knowledge in the data but restrict undesired o.o.d. situations is to constraint the learned policy to mimic the right behavior observed in the data.</p>
+<section id="a-non-implicit-or-direct">
+<h4>a) Non-implicit or Direct<a class="headerlink" href="#a-non-implicit-or-direct" title="Permalink to this heading">#</a></h4>
+<p><strong>We have access to the behavior policy, <span class="math notranslate nohighlight">\(\bf \pi_\beta\)</span></strong></p>
+<p>Since we already have <span class="math notranslate nohighlight">\(\pi_\beta\)</span>, we can constrain the learned and behavioral policy using:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-149659d4-fff2-49a1-9987-72229b8faef1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-149659d4-fff2-49a1-9987-72229b8faef1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+D_{KL}(\pi(.|s)||\pi_{\beta}(.|s)) \leq \epsilon
+\label{dk_1}
+\end{equation}\]</div>
+<div style="margin-top: 20px;">
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 49%;">
+            <img src="_static/images/96_KL_divergence.png" alt="KL divergence" width="100%">
+            <div class="slide title"> Fig.1: KL Divergence </div>
+        </div>
+        <div style="width: 10%;"></div> <!-- Empty div for space in the middle -->
+        <div style="width: 40%;">
+            <img src="_static/images/96_DKL_2.png" alt="Your Second Image" width="100%">
+        </div>
+    </div>
+</div>
+<p>where the Kullback-Leibler divergence, <span class="math notranslate nohighlight">\(D_{KL}\)</span>, is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{KL}(\pi(.|s)||\pi_{\beta}(.|s)) = \sum_a \pi(a|s) log \frac{\pi(a|s)}{\pi_{\beta}(a|s)} 
+\label{dkl_2}
+\]</div>
+<img src="_static/images/96_policy_constraint_DKL.png" alt="KL divergence" width=60%>
+<div class="slide title"> Fig.2: DKL divergence's effect on out-of-distribution data </div>
+<p><strong>To summarize</strong>: The <span class="math notranslate nohighlight">\(D_{KL}\)</span> divergence discourages undesired o.o.d actions, as in case (b), yet encourages important o.o.d actions, as in case (a), crucial for enhancing the learned policy. This ensures that state distributions <span class="math notranslate nohighlight">\(d_{\pi}(s)\)</span> and <span class="math notranslate nohighlight">\(d_{\pi_{\beta}}(s)\)</span> are close around a given state <span class="math notranslate nohighlight">\(s\)</span>, so the distributional shift won’t be too large. In contrast, case (b) will typically exhibits a large distributional shift.</p>
+<p>Moreover, actions such as <span class="math notranslate nohighlight">\(a_4\)</span>, in fig.2a, may guide our agent to highly rewarding regions, as illustrated in the figure below.</p>
+<img src="_static/images/96_critical_action_states.png" alt="KL divergence" width=50%>
+<div class="slide title"> Fig.3: Critical actions may appear infrequently in the collected data but are crucial for finding the optimal policy. </div><p><strong>These methods typically use the evaluation-improvement approach, introduced before, plus the <span class="math notranslate nohighlight">\(D_{KL}\)</span> constraint</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat Q}^{k+1} \leftarrow L_1 = \arg \min_Q \mathbb{E}_{(s,a,s')\sim D} \left[\left( Q_\phi(s, a) - r(s, a) - \gamma \mathbb{E}_{a' \sim\pi_\theta(a'|s')}[Q_\phi(s', a')] \right)^2 \right]  \tag{Evaluation}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pi_{k+1} \leftarrow L_2 = \arg \max_{\pi} \mathbb{E}_{s\sim D} \left[ \mathbb{E}_{a \sim\pi_\theta(a|s)} Q^{k+1}_\phi(s, a) \right] \tag{Improvement}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+D_{KL}(\pi(.|s), \pi_{\beta}(.|s)) \leq \epsilon.
+\tag{Constraint}
+\end{equation}
+\]</div>
+<p><strong>Technical comment</strong>: We could incorporate this constraint as a Lagrange multiplier, or sometimes it is absorbed in the evaluation and improvement steps:</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat Q}^{\pi}_{k+1} \leftarrow \arg \min_Q \mathbb{E}_{(s,a,s')\sim D} \left[\left( Q(s, a) -  r(s, a) + \gamma \mathbb{E}_{a' \sim\pi_k(a'|s')}[{\hat Q}^{\pi}_k(s', a')] -\alpha D_{KL}(\pi_k(\cdot|s'), \pi_\beta(\cdot|s')) \right)^2 \right]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pi_{k+1} \leftarrow \arg \max_{\pi} \mathbb{E}_{s\sim D} \left[ \mathbb{E}_{a \sim\pi(a|s)} Q^{\hat{\pi}_{k+1}}(s, a) -\alpha D_{KL}(\pi_k(\cdot|s), \pi_\beta(\cdot|s)) \right] \\
+\end{split}\]</div>
+<p>that produces similar results, with the advantage that is much easier to implement from a technical point of view.</p>
+<p><strong>But what happens if we need to deviate considerably from the behavior policy, as can happens in realistic situations where the data collected is far from optimal?</strong>.</p>
+<p>Let’s  analize the simple example in the fig. below:</p>
+<img src="_static/images/96_support_policy_constraint.png" alt="offline_rl_4" width=70%>
+<p>where all data is in-distribution. Still the <span class="math notranslate nohighlight">\(D_{KL}\)</span> constraint distribution will copy the bad behavior of <span class="math notranslate nohighlight">\(\pi_b\)</span> .</p>
+<p>What about constraining the policy support? In other words, <strong>we don’t focus on the probability of action <span class="math notranslate nohighlight">\(a\)</span> within the dataset, but only on whether that action is included in the dataset</strong>.</p>
+<img src="_static/images/policy_constraint_vs_support.png" alt="offline_rl_4" width=40%>
+<div class="slide title"> Fig.4: distributional vs. support policy constraint </div>
+<p><strong>This is usually a good idea: Just constrain only allowed actions and let the algorithm find the action probabilities through the evaluation-improvement equations.</strong></p>
+<p><strong>Summary</strong></p>
+<p><strong>Direct constraint methods assume you have access to the behavior policy.</strong></p>
+<p>They are typically of two kinds:</p>
+<ul class="simple">
+<li><p>Constraint on distribution: easy to implement and generally effective, but they can sometime be too conservative.</p></li>
+<li><p>Constraint on support: a good choice when the behavior policy deviates significantly from optimality.</p></li>
+</ul>
+</section>
+<section id="b-implicit">
+<h4>b) Implicit<a class="headerlink" href="#b-implicit" title="Permalink to this heading">#</a></h4>
+<p><strong>We don’t need <span class="math notranslate nohighlight">\(\pi_\beta\)</span>, and we can work directly with our data <span class="math notranslate nohighlight">\(D\)</span></strong>. Useful in complex high dimensional spaces where the BC of the behavioral policy is not accurate.</p>
+<p>First we assume that we have <span class="math notranslate nohighlight">\(\pi_\beta\)</span> (we will integrate it out later). <strong>We maximize the difference reward</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+max_\pi \eta(\pi) &amp;= max_\pi ( J(\pi) - J(\pi_\beta) ) \qquad \hbox{with} \quad J (\pi) = \mathbb{E}_{\tau \sim \pi}  \left[ \sum_{t = 0}^{\infty} \gamma^t r (s_t, a_t) \right] \\ \text{s.t.} \quad &amp;D_{KL}(\pi(\cdot|s) || \pi_\beta(\cdot|s) ) \leq \epsilon
+\tag{2}
+\end{align}
+\end{split}\]</div>
+<p>so as higher <span class="math notranslate nohighlight">\(\eta(\pi)\)</span> the better <span class="math notranslate nohighlight">\(\pi\)</span> .</p>
+<p><strong>Note</strong>: This is a slightly different idea than what we usually follow to find the policy that maximizes the discounted reward.</p>
+<p>It can be shown that (2) can be written as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-47bdbdf7-880e-4540-b1da-534e8e4f6d34">
+<span class="eqno">(2)<a class="headerlink" href="#equation-47bdbdf7-880e-4540-b1da-534e8e4f6d34" title="Permalink to this equation">#</a></span>\[\begin{equation}
+max_\pi \eta(\pi) = max_\pi \mathbb{E}_{s \sim d^{\pi}(s)} \mathbb{E}_{a \sim \pi(a|s)} [A^{\pi_\beta}(s, a)] \\ \text{s.t.} \quad D_{KL}(\pi(\cdot|s) || \pi_\beta(\cdot|s) ) \leq \epsilon
+\tag{3}
+\end{equation}\]</div>
+<p>with <span class="math notranslate nohighlight">\(A^{\pi_\beta}(s, a) = Q^{\pi_\beta}(s, a) -V^{\pi_\beta}(s)\)</span> the Advantage function.</p>
+<p>As we will shown next, eq.3 will give us the optimal policy.</p>
+<p>Let’s try to understand eq.3:</p>
+<img src="_static/images/96_difference_reward.png" alt="offline_rl_4" width=80%>
+<div class="slide title"> Figure 5: Optimal policy from difference reward maximization.</div>
+<p><strong>In summary, eq.3 implies finding a policy <span class="math notranslate nohighlight">\(\pi(a|s)\)</span> that generates state-action pairs <span class="math notranslate nohighlight">\((s_0,a_0)\)</span> (constrained through the <span class="math notranslate nohighlight">\(D_{KL}\)</span> to be close to the dataset) that lead to trajectories in our dataset with maximum reward. In other words, we are trying to find the optimal policy within the data.</strong></p>
+<p>Let’s jump to the final solution of eq.3. If you are interested in more mathematical details see the slide below. The optimal policy, <span class="math notranslate nohighlight">\(\hat{\pi}_\theta (a|s)\)</span>, is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\pi}_\theta (a|s) \leftarrow
+\arg\max_{\pi_\theta} \mathbb{\sum}_{(s,a)\sim D} \left[ \frac{1}{Z(s)} \log \pi_\theta(a|s) \exp\left(\frac{1}{\lambda} A^{D}(s, a)\right) \right]
+\label{AWR}
+\tag{4}
+\]</div>
+<p><strong>Interpretation: the maximization operation in eq.4 implies that <span class="math notranslate nohighlight">\(\pi_\theta(a|s)\)</span> will be maximum in state-action pairs within or close to <span class="math notranslate nohighlight">\(D\)</span>, but only if <span class="math notranslate nohighlight">\((s,a)\)</span> brings the agent to a high reward region, i.e., if <span class="math notranslate nohighlight">\(\exp\left(\frac{1}{\lambda} A^{D}(s, a)\right)\)</span> (or <span class="math notranslate nohighlight">\(A^{D}(s, a)\)</span>) is high.</strong></p>
+<p>This is in perfect agreement with out previous interpretation in fig.5.</p>
+<p><strong>Finally, note that to compute equation 3, we need <span class="math notranslate nohighlight">\(Q^{\pi_\beta}(s, a)\)</span>, so we could use the dynamic programming evaluation step introduced before, where eq.4, plays the role of the improvement step.</strong>.</p>
+<p><strong>ALERT!! : Only if you are interested in the math:</strong></p>
+<p>It is easy to see that the solution to eq.3 is:</p>
+<p><span class="math notranslate nohighlight">\(
+\pi^*(a|s) = \frac{1}{Z(s)} \pi_\beta(a|s) \exp\left(\frac{1}{\lambda} A^{\pi_\beta}(s, a)\right)  \quad \text{with } \lambda \in R
+\tag{4}.
+\)</span></p>
+<p>were <span class="math notranslate nohighlight">\(\lambda\)</span> comes from a Lagrange multiplier that take into accounts the <span class="math notranslate nohighlight">\(D_{KL}\)</span> constraint.</p>
+<p><strong>Again eq.4 means that <span class="math notranslate nohighlight">\(\pi^*(a|s)\)</span> is given by the probability of finding <span class="math notranslate nohighlight">\((s,a)\)</span> in the dataset (i.e. <span class="math notranslate nohighlight">\(\pi_\beta(a|s)\)</span>) times the probability that <span class="math notranslate nohighlight">\((s,a)\)</span> drives the agent to a high cumulative reward (<span class="math notranslate nohighlight">\(~ \exp\left(\frac{1}{\lambda} A^{\pi_\beta}(s, a)\right)\)</span>).</strong></p>
+<p>Finally, if we approximate our theoretical optimal policy <span class="math notranslate nohighlight">\(\pi^*(a|s)\)</span> by a DNN <span class="math notranslate nohighlight">\(\pi_\theta (a|s)\)</span>, we can use an SVI approach:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\pi_\theta (a|s) &amp;= \arg\min_{\pi_\theta} \mathbb{E}_{s \sim d_{\pi_\beta}(s)} \left[ D_{KL}(\pi^*(\cdot|s) \, \Vert \, \pi_\theta(\cdot|s)) \right] \\ &amp;= \arg\max_{\pi_\theta} \mathbb{E}_{s \sim d_{\pi_\beta}(s)} \mathbb{E}_{a \sim \pi_\beta(a|s)} 
+\left[ \frac{1}{Z(s)} \log \pi_\theta(a|s) \exp\left(\frac{1}{\lambda} A^{\pi_\beta}(s, a)\right) \right] 
+\quad (5)
+\end{aligned}\end{split}\]</div>
+<p>where the sampling is through <span class="math notranslate nohighlight">\(\pi_\beta\)</span> that we can replace by the collected dataset:</p>
+<div class="math notranslate nohighlight">
+\[
+\pi_\theta (a|s) =
+\arg\max_{\pi_\theta} \mathbb{\sum}_{(s,a)\sim D} \left[ \frac{1}{Z(s)} \log \pi_\theta(a|s) \exp\left(\frac{1}{\lambda} A^{D}(s, a)\right) \right]
+\tag{6}
+\]</div>
+</section>
+<section id="id1">
+<h4>Summary:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Policy constraint methods are able to fill gaps in the collected data to guide the agent to high-reward regions while also discouraging o.o.d. behavior. This can be achieved by constraining the density or the support of the policy, if you have access to the behavior policy. If you don’t, methods like implicit policy constraints could be the way to go.</p></li>
+<li><p>Policy constraint methods are powerful, but they can often be too pessimistic, which is undesirable.
+For example, if we know that a certain state has all actions yielding zero reward, we should not constrain the
+policy in this state, as could affect our neural network approximator.</p></li>
+</ul>
+<p><strong>An alternative approach to avoid o.o.d actions without directly constraining the policies is to control o.o.d behavior from a Q-function perspective.</strong></p>
+</section>
+</section>
+<section id="ii-policy-regularization-methods">
+<h3>II - Policy Regularization methods<a class="headerlink" href="#ii-policy-regularization-methods" title="Permalink to this heading">#</a></h3>
+<p><strong>This approach involves regularizing the value function directly, aiming to prevent overestimation, especially for actions that fall outside the distribution seen during training</strong></p>
+<p>Advantages:</p>
+<ul class="simple">
+<li><p><strong>Applicable to different RL methods, including actor-critic and Q-learning methods.</strong></p></li>
+<li><p><strong>Doesn’t necessitate explicit behavior policy modeling.</strong></p></li>
+</ul>
+<img src="_static/images/96_CQL_1.png" alt="offline_rl_4" width=100%>
+<div class="slide title"> Fig.6: Policy regularization approach </div>
+<p><strong>Main idea: introduce a new policy <span class="math notranslate nohighlight">\(\mu(a|s)\)</span> that attempts to find the actions <span class="math notranslate nohighlight">\(a\)</span> maximizing the DNN <span class="math notranslate nohighlight">\(Q_\phi\)</span>, while simultaneously minimizing <span class="math notranslate nohighlight">\(Q_\phi\)</span> within the <span class="math notranslate nohighlight">\(\phi\)</span> parameter space. This effect is particularly crucial for o.o.d. actions, which are generally overestimated, as previously observed.</strong></p>
+<p><strong>The policy <span class="math notranslate nohighlight">\(\mu\)</span> doesn’t necessarily have to be proportional to <span class="math notranslate nohighlight">\(\pi(a|s)\)</span>, but it should aim to maximize Q(s,a).</strong></p>
+<p>These are some popular offline RL algorithms, but the list is longer:</p>
+<img src="_static/images/nb_94_popular_offline_rl_algorithms.png" alt="offline_rl_4" width=100%>
+<p>It’s worth noting that most of these algorithms fall into the categories we’ve already discussed, namely policy constraint and policy optimization methods</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="appendix-short-review-of-some-popular-offline-rl-algorithms">
+<h1>Appendix: Short review of some popular offline RL algorithms<a class="headerlink" href="#appendix-short-review-of-some-popular-offline-rl-algorithms" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this notebook, we will explore several key algorithms that aim to address distributional shift issues within offline reinforcement learning. It’s worth noting that the field of offline RL is evolving rapidly, and this list is by no means exhaustive. Many of the concepts and strategies employed by these algorithms find applications and improvements in various other approaches.</p>
+<p>A common approach followed by many algorithms in offline RL involves an actor-critic methodology. Within this framework, there is an iterative process of evaluation and improvement, characterized by:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+{\hat Q}^{\pi}_{k+1} \gets \arg \min_Q \mathbb{E}_{s,a \sim \mathcal{D}} \Big[\big(Q(s,a) - \mathcal{B}^{\pi}_k Q(s,a)\big)^2\Big].
+\tag{Evaluation}
+\end{equation}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\mathcal{B}^{\pi}Q = r + {\gamma}\mathbb{E}_{s' \sim D, a' \sim \pi}Q(s',a') 
+\tag{Bellman backup op.}
+\end{equation}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\pi_{k+1} \leftarrow \arg \max_{\pi} \mathbb{E}_{s\sim D} \left[ \mathbb{E}_{a \sim\pi(a|s)} Q^{\hat{\pi}}_{k+1}(s, a) \right] \tag{Improvement}
+\end{equation}
+\]</div>
+<p>So the main idea is to modify the Evaluation/Improvement steps to improve the distributional shift problems.</p>
+</section>
+<section id="batch-constrained-deep-q-learning-bcq-algorithm">
+<h2>Batch Constrained deep Q-learning (BCQ) algorithm<a class="headerlink" href="#batch-constrained-deep-q-learning-bcq-algorithm" title="Permalink to this heading">#</a></h2>
+<p>The main idea is pictured in the figure below.</p>
+<img src="_static/images/97_BCQ_algo_1.png" alt="offline_rl_4" width=200%>
+<div class="slide title"> Fig.5: BCQ approach to offline RL </div>
+<p>In BCQ, the policies <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi_\beta\)</span> are not constrained by the <span class="math notranslate nohighlight">\(D_{KL}\)</span> divergence, but we still ensure that <span class="math notranslate nohighlight">\(\pi(s)\)</span> generates similar actions to <span class="math notranslate nohighlight">\(\pi_\beta(s)\)</span> through a generative model, in this case, a Variational Autoencoder (VAE), <span class="math notranslate nohighlight">\(G_\omega\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pi(s) = \arg\max_{a_i} Q_\theta(s, a_i),
+\\ \{a_i \sim G_\omega(s)\}_{i=1}^n
+\tag{7}
+\end{split}\]</div>
+<p>Therefore, this method falls under the direct policy constraint approach discussed earlier.</p>
+<p>The BCQ algorithm uses a clipped Double Deep Q-Learning (clipped-DDQ) approach to compute the Q-values:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta_i, D) = \mathbb{E}_{ s,a,r,s' \sim D} \left[  Q_{\theta_i}(s,a) - y(r,s') \right]
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+y(r,s') = r + \gamma max_{a_i} min_{i=1,2} Q_{\theta_i, targ} (s', a_i)
+\]</div>
+<p>The minimum is taken to avoid the overestimation of Q-values, an issue that also occurs in these kinds of methods in online RL. In offline RL, as we saw, o.o.d. actions are the ones that typically produce such overestimations. Therefore, clipped-DDQ also introduces control over this issue at the Q-value level, achieving a similar effect to what policy regularization methods aim for with a lower bound on Q-values.</p>
+<p><strong>A few technical details</strong>:</p>
+<p>The actions in eq. 7 are clipped with some noise <span class="math notranslate nohighlight">\(\epsilon\)</span>, hence the name clipped, as this also helps to avoid overestimation of Q-values.</p>
+<div class="math notranslate nohighlight">
+\[
+a \rightarrow clip [a + clip(\epsilon, -c, c), a_{low}, a_{high}]
+\]</div>
+<p>We allow actions with high Q-values to introduce some uncertainty, helping the algorithm explore regions of lower reward to avoid overestimation effects.</p>
+<p>Finally, as running a VAE during training can be computationally expensive, the algorithm introduces a perturbation model <span class="math notranslate nohighlight">\(\xi_\phi(s, a_i, \Phi)\)</span>, which outputs an adjustment to an action <span class="math notranslate nohighlight">\(a\)</span> in the range <span class="math notranslate nohighlight">\([-\Phi, \Phi]\)</span>. Therefore, eq.7 becomes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pi(s) = \arg\max_{a_i + \xi_\phi(s, a_i, \Phi)} Q_\theta(s, a_i + \xi_\phi(s, a_i, \Phi)),
+\\ \{a_i \sim G_\omega(s)\}_{i=1}^n
+\end{split}\]</div>
+<p>Note that if <span class="math notranslate nohighlight">\(\Phi=0\)</span> and <span class="math notranslate nohighlight">\(n=1\)</span> the policy will resemble behavioral cloning.
+On the opposite side if d <span class="math notranslate nohighlight">\(\Phi \rightarrow a_{max} - a_{min}\)</span> and <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>, then the algorithm approaches Q-learning, as the policy begins to greedily maximize the value function over the entire action space.</p>
+<p><strong>Pros</strong>: As it learns how to generate new actions not included in the dataset, it is suitable for small datasets and for unbalanced sets where a few unrepresented actions could be important for the task to be solved.</p>
+<p><strong>Cons</strong>:  Since BCQ generates actions from a VAE, if the dataset used to train it underrepresents some important actions, the VAE may struggle to generate meaningful actions around those states, making the discovery of new or unconventional actions difficult. This is one of the limitations of constrained policy approaches.</p>
+</section>
+<section id="conservative-q-learning-cql-algorithm">
+<h2>Conservative Q-Learning (CQL) algorithm<a class="headerlink" href="#conservative-q-learning-cql-algorithm" title="Permalink to this heading">#</a></h2>
+<p>CQL follows a pessimistic approach by considering a lower bound of the Q-value. In the paper the authors shown that the solution of:</p>
+<p><span class="math notranslate nohighlight">\(\hat{Q}^{k+1}_{\text{CQL}} \gets \hbox{argmin}_Q \left[ \color{red} {\alpha\big(\mathbb{E}_{s \sim \mathcal{D}, a \sim \mu}[Q(s,a)] - \mathbb{E}_{s,a \sim \mathcal{D}}[Q(s,a)]\big)} + \frac{1}{2} \mathbb{E}_{s,a \sim \mathcal{D}} \Big[\big(Q(s,a) - \mathcal{B}^{\pi}Q(s,a)\big)^2\Big] \right].\)</span></p>
+<p>for <span class="math notranslate nohighlight">\(\mu = \pi\)</span> is a lower bound for the Q value.</p>
+<p>The nice thing about this method is that it can be applied to any Actor Critic method in a few lines of code.</p>
+<p>CQL Focuses on <strong>conservative value estimation</strong> to provide lower bounds on the expected return of a policy. Aims to reduce overestimation bias and ensure that the policy remains within a safe region of the state-action space. Achieves safe exploration by constructing action sets that cover a broader range of state-action pairs.
+Well suited for scenarios where safety is a top priority, as it <strong>reduces the risk of catastrophic actions</strong>.</p>
+<p>Note that BCQ could be better to discover novel actions and to use the collected data more efficiently but may not guarantee complete safety!.</p>
+</section>
+<section id="implicit-q-learning-iql-algorithm">
+<h2>Implicit Q-Learning (IQL) algorithm<a class="headerlink" href="#implicit-q-learning-iql-algorithm" title="Permalink to this heading">#</a></h2>
+<p>This is another clever idea to avoid going out of distribution. Let’s revisit the ideas for evaluation improvement, assuming that we only operate with state-action pairs from the dataset in a SARSA-style approach, i.e.:</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat Q}_{k+1} \leftarrow \arg \min_Q \mathbb{E}_{(s,a,s',a')\sim D} \left[\left( Q(s, a) -  r(s, a) + \gamma{\hat Q}_k(s', a')  \right)^2 \right]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pi_{k+1} \leftarrow \arg \max_{\pi} \mathbb{E}_{s\sim D} \left[ \mathbb{E}_{a \sim\pi(a|s)} Q^{\hat{\pi}_{k+1}}(s, a)  \right] \\
+\end{split}\]</div>
+<p>This is indeed a valid approach. It’s important to note that running the evaluation-improvement loop makes sense only once. During evaluation, we compute the <span class="math notranslate nohighlight">\(Q\)</span>-values of the behavior policy and derive the optimal policy based on those <span class="math notranslate nohighlight">\(Q\)</span>-values in the improvement step. Further iterations would be futile since we are limited to the fixed dataset.</p>
+<p>However, this idea often falls short in finding an optimal policy for many real-world problems. Intuitively, if our data is suboptimal, the Q-values derived from that data will also be suboptimal.</p>
+<p>The core principle of IQL is to utilize a pessimistic Q-value lower bound during evaluation, similar to policy regularization, while also ensuring consistency with in-distribution data. This strategy enables a multi-step process, facilitating multiple evaluation-improvement iterations. With each iteration, a new estimate for Q(s,a) is derived, encouraging a deeper exploration of the Q-functions and enabling the capture of broader correlations.</p>
+<img src="_static/images/96_one_step_vs_multiple_steps.png" alt="offline_rl_4" width=80%>
+<div class="slide title"> Fig.6: one vs multiple step approaches.  </div>
+<p>These are the main steps involved in the IQL approach:</p>
+<div class="math notranslate nohighlight">
+\[L_V(\psi) = E_{(s,a)\sim D}[L_2^{\tau}(Q_{\hat{\theta}}(s, a) - V_{\psi}(s))]\]</div>
+<div class="math notranslate nohighlight">
+\[L_Q(\theta) = E_{(s,a,s') \sim D}\left[(r(s, a) + \gamma V_{\psi}(s') - Q_{\theta}(s, a))^2\right]\]</div>
+<p>and for the policy improvement step, it uses an advantage weighted regression:</p>
+<div class="math notranslate nohighlight">
+\[L_\pi(\phi) = E_{(s,a)\sim D} \left[\exp(\beta(Q_{\hat{\theta}}(s, a) - V_{\psi}(s))) \log \pi_{\phi}(a|s)\right]
+\]</div>
+<p>similar to eq.4 . The lower bound used here is the ‘expectile’ shown in the figure below.</p>
+<img src="_static/images/96_expectile.png" alt="offline_rl_4" width=80%>
+<div class="slide title"> Fig.7: Expectile of a two dimenstional random variable.  </div>
+</section>
+<section id="q-transformer">
+<h2>Q-Transformer<a class="headerlink" href="#q-transformer" title="Permalink to this heading">#</a></h2>
+<p>Adapts the bellman equations to deal with a transformer architecture: <a class="reference external" href="https://qtransformer.github.io/">paper</a> and <a class="reference external" href="https://qtransformer.github.io/">blog</a></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://arxiv.org/pdf/1502.05477.pdf">Schulman et al. 2017 - Trust Region Policy Optimization</a></p>
+<p><a class="reference external" href="https://arxiv.org/pdf/2006.04779.pdf">Kumar et al. 2020 - Conservative Q-Learning for Offline Reinforcement Learning</a></p>
+<p><a class="reference external" href="https://arxiv.org/pdf/2005.01643.pdf"> Levine et al. 2021 - Offline Reinforcement Learning: Tutorial, Review,
+and Perspectives on Open Problems </a></p>
+<p><a class="reference external" href="https://arxiv.org/abs/1910.00177">Peng et al. 2019 - Simple and Scalable Off-Policy Reinforcement Learning</a></p>
+<p><a class="reference external" href="https://arxiv.org/abs/2006.09359">Nair et al. ‘2020 - AWAC: Accelerating Online Reinforcement Learning with Offline Datasets</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "offline-rl-example"
+        },
+        kernelOptions: {
+            name: "offline-rl-example",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'offline-rl-example'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nb_2_data_dollection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise: Minari data collection</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nb_4_Offline_rl_exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise: Offline RL algorithms</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Offline RL theory</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-issues">Main issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-out-of-distribution-issues">Addressing out of distribution issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-policy-constraint-methods">I - Policy constraint methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-non-implicit-or-direct">a) Non-implicit or Direct</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-implicit">b) Implicit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Summary:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-policy-regularization-methods">II - Policy Regularization methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-short-review-of-some-popular-offline-rl-algorithms">Appendix: Short review of some popular offline RL algorithms</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-constrained-deep-q-learning-bcq-algorithm">Batch Constrained deep Q-learning (BCQ) algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conservative-q-learning-cql-algorithm">Conservative Q-Learning (CQL) algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-q-learning-iql-algorithm">Implicit Q-Learning (IQL) algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-transformer">Q-Transformer</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ivan Rodriguez
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
