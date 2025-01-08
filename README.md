@@ -15,10 +15,10 @@ I have a proven track record of delivering impactful AI-driven projects.
 ## Expertise and Interests:
 
 I am passionate about various fields of Machine Learning, particularly Deep Learning, Bayesian Machine Learning, 
-Reinforcement Learning (RL) and surrogate models to speed up complex physics simulations. 
-I am also interested in leveraging large language models (LLMs) and transformers in areas such as Retrieval-Augmented 
-Generation (RAG), generative AI for engineering design, and techniques like Imitation Learning or Behavioral Cloning.
-
+Reinforcement Learning (RL), and the use of surrogate models to accelerate complex physics simulations. I am also 
+interested in applications of large language models (LLMs), such as in Retrieval-Augmented Generation (RAG) systems 
+and generative AI for engineering design, as well as the use of transformer architectures in areas like Imitation 
+Learning and Behavioral Cloning.
 
 ## Professional Timeline
 
@@ -35,9 +35,10 @@ Generation (RAG), generative AI for engineering design, and techniques like Imit
 I have worked on many cool projects throughout my academic and private sector career. While many of these are confidential, 
 I have selected a few to showcase as examples of my previous work.
 
-- <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> - 
-  [link to repo](https://github.com/ivandrodri/offline-rl.git) - [link to html notebooks](https://ivandrodri.github.io/offline-rl/index.html)
-- GPU based voxelizer - [link to repo](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git)
+- <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> (this example uses the
+ code in my [repo](https://github.com/ivandrodri/offline-rl.git) - give a look at the [html notebooks](https://ivandrodri.github.io/offline-rl/index.html) to see 
+ how to use the library.
+- [GPU based voxelizer](https://gitlab.com/ivandiegorodriguez/gpumeshvoxelization.git)
 - <a href="/ivan-homepage/projects/project_cnc_gpu_simul">GPU based CNC milling/collision detection simulation</a>
    (private repo for now) 
 - RAG System for Technical Documentation (
@@ -47,9 +48,9 @@ I have selected a few to showcase as examples of my previous work.
 
 ## Personal Notes on Machine Learning Topics
 
+- [Bayesian Deep Neural Networks with SVI and Laplace approximation](projects/laplace_approximation)
 - [Notes on dropout as Bayesian approximation](assets/docs/Dropout_as_bayesian_approx_talk.pdf)
 - [Notes on Concept Activation Vectors](assets/docs/XAI_seminar_notes.pdf)
-- [Bayesian Deep Neural Networks with SVI and Laplace approximation](projects/laplace_approximation)
 
 ## Recent Highlights
 
