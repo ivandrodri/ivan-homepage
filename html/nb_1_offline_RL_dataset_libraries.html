@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Open Source Datasets libraries for offline RL &#8212; Offline Reinforcement Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/configmacros"]}, "tex": {"packages": {"[+]": ["configmacros"]}, "macros": {"vect": ["{\\mathbf{\\boldsymbol{#1}} }", 1], "E": "{\\mathbb{E}}", "P": "{\\mathbb{P}}", "R": "{\\mathbb{R}}", "abs": ["{\\left| #1 \\right|}", 1], "simpl": ["{\\Delta^{#1} }", 1], "amax": "{\\text{argmax}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nb_1_offline_RL_dataset_libraries';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Exercise: Minari data collection" href="nb_2_data_dollection.html" />
+    <link rel="prev" title="Introduction to Offline Reinforcement Learning" href="nb_0_IntroOfflineRL.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Offline Reinforcement Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Offline RL Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="nb_0_IntroOfflineRL.html">Introduction to Offline Reinforcement Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Open Source Datasets libraries for offline RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_2_data_dollection.html">Exercise: Minari data collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_3_offline_RL_theory.html">Offline RL theory</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="nb_4_Offline_rl_exercises.html">Exercise: Offline RL algorithms</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/nb_1_offline_RL_dataset_libraries.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Open Source Datasets libraries for offline RL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minari-dataset">MINARI Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-minari-methods">Useful minari methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minari-dataset-structure">Minari dataset structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rl-unplugged-dataset">RL Unplugged dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-x-embodiment-repository">Open X-Embodiment Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">set_random_seed</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">presentation_style</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UsageError: Line magic function `%presentation_style` not found.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_latex_macros</span>;
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="open-source-datasets-libraries-for-offline-rl">
+<h1>Open Source Datasets libraries for offline RL<a class="headerlink" href="#open-source-datasets-libraries-for-offline-rl" title="Permalink to this heading">#</a></h1>
+<p><strong>The goal of offline RL or imitation learning is to learn a policy from a fixed dataset. This approach has gained significant attention because it allows RL methods to utilize vast, pre-collected datasets, somewhat similar to how large datasets have propelled advances in supervised learning.</strong></p>
+<p>Data collection from sensors or cameras is now easy in many areas like robotics, automotive, and manufacturing. We need a standard way to organize and process this data, including custom data from real machines or simulations. Before, offline RL didn’t have a standard method. New algorithms needed a lot of data preprocessing, especially with large datasets, which was costly.</p>
+<p>The MINARI library was made to handle offline RL data tasks efficiently. It also offers a diverse collection of datasets</p>
+<section id="minari-dataset">
+<h2>MINARI Dataset<a class="headerlink" href="#minari-dataset" title="Permalink to this heading">#</a></h2>
+<p>(previously called D4RL from UC Berkeley/Google Brain)</p>
+<p><strong>Minari is becoming the standard choice, replacing D4RL in the community. Its main goal is to standardize data handling and offer open-source datasets tailored for offline RL.</strong></p>
+<p>These datasets match real-world needs and are crucial for testing and improving offline algorithms. Minari provides datasets with random, medium, and expert policies in various environments, helping us evaluate whether an algorithm can extract meaning from noise.</p>
+<p>These datasets can be used for benchmarking, as existing benchmarks for online RL are not suitable for offline RL, as we’ll discuss later.</p>
+<p>In particular the provided datasets focus mainly on the following properties that appear often in realistic situations:</p>
+<p>1 - <strong>Narrow and biased data distributions</strong>: e.g. from deterministic policies: Narrow datasets may arise in human demonstrations or in hand-crafted policies. <strong>(not an issue in online RL)</strong></p>
+<p>2 - <strong>Undirected and multitask data</strong>: refers to data collected without a specific task in mind, such as Internet user interactions or videos for autonomous driving. Although gathered without a clear scope, this data is intended for solving specific tasks. Offline RL aims to identify and use the most rewarding paths within this data.</p>
+<p>The main purpose is to test how well the offline agent can be used for “trajectory stitching,” which involves combining trajectories from different tasks to achieve new objectives, rather than searching for out-of-distribution trajectories.</p>
+<img src="_static/images/stiching.png" alt="stich_traj" style="width:200px;">
+<p>As seen in the figure, suppose we have collected data from our car only for paths 1-2 (green) and 2-3 (yellow); we should be able to use this data to teach our car to go from 1-3. <strong>(not an issue in online RL)</strong></p>
+<p>3 - <strong>Sparse rewards</strong>: pose challenges in online setups because they are closely tied to exploration. In offline RL, we explore only within the dataset, making it perfect for studying how algorithms handle sparse rewards. Crafting effective rewards can be difficult, and overly complex rewards may lead to suboptimal results. On the other hand, sparse rewards are often easier to design since they just define the task’s success criteria, making them attractive to work with</p>
+<img src="_static/images/91_2d_maze.png" alt="Snow" style="width:30%;">
+<div class="slide title"> Sparse reward scenario: the reward is 0 everywhere except at the end, where it is equal to 1. </div><p>4 - <strong>Suboptimal data</strong>: Give a clear task the data could not contain any optimal trajectory so this is a realistic scenario in general and still the offline agent should be able to find the best trajectory within the data.</p>
+<p>5 - <strong>Non-representable behavior policies</strong>: non-Markovian behavior policies, and partial observability. For instance, if the data is collected with a classical control algorithm that have access to a window of previous states. <strong>(not an issue in online RL)</strong></p>
+<p>6 - <strong>Realistic domains</strong>: Different Mujoco tasks as robot manipulation or multi-tasking.</p>
+<p><strong>Suggestion</strong>: give a look to <a class="reference external" href="https://minari.farama.org/main/content/basic_usage/">Minari</a> and in particular to the provided datasets ti get familiar with the library.</p>
+<section id="useful-minari-methods">
+<h3>Useful minari methods<a class="headerlink" href="#useful-minari-methods" title="Permalink to this heading">#</a></h3>
+<p><strong>DataCollector (gymnasium.Wrapper) class</strong>: Collects data <span class="math notranslate nohighlight">\({state_i, action_i, reward_i, termination_i, truncation_i, info_i, i=1,..,H}\)</span> through a Gymnasium environment by performing rollouts of <span class="math notranslate nohighlight">\(\pi_b(a|s)\)</span>, similar to what we did in the online RL section.</p>
+<p><strong>DataCollector.create_dataset(…)</strong>: Saves the dataset to storage.</p>
+<p><strong>minari.create_dataset_from_buffer(…)</strong>: Converts historical data to Minari format. Requires to preprocess your data as explained in the Minari documentation.</p>
+<p><strong>minari.load_dataset(…)/minari.list_local_datasets()</strong>: Loads/lists Minari GCP registered datasets.</p>
+<p><strong>minari.combine_datasets(…)</strong>: Merges two Minari datasets into one.</p>
+<p><strong>Minari also includes other functionalities, such as splitting datasets or saving metadata.</strong></p>
+</section>
+<section id="minari-dataset-structure">
+<h3>Minari dataset structure<a class="headerlink" href="#minari-dataset-structure" title="Permalink to this heading">#</a></h3>
+<p>Here is the typical Minari dataset folder structure:</p>
+<img src="_static/images/nb_91_minari_dataset.png" alt="minari_folder_structure" style="width:300px;"><p>And this is how the data is saved in the .hdf5 file:</p>
+<img src="_static/images/nb_91_minari_dataset_2.png" alt="minari_folder_structure" style="width:300px;">
+<p>HDF5 is an open-source file format for large, complex data. It uses a file directory structure, compresses data for smaller file sizes, and allows data slicing to process subsets without loading everything into memory.</p>
+<p>Minari stores datasets in HDF5 format using h5py. HDF5 organizes data into groups and datasets, supports data slicing, and allows custom meta</p>
+</section>
+</section>
+<section id="rl-unplugged-dataset">
+<h2>RL Unplugged dataset<a class="headerlink" href="#rl-unplugged-dataset" title="Permalink to this heading">#</a></h2>
+<p>(Deep Mind - Google Brain) <a class="reference external" href="https://github.com/google-deepmind/deepmind-research/tree/master/rl_unplugged">github</a> and <a class="reference external" href="https://www.deepmind.com/blog/rl-unplugged-benchmarks-for-offline-reinforcement-learning">blog</a></p>
+<p>The tasks are diverse, but the key point is that <strong>most datasets are based on behavior policies trained online. This means the data might not accurately represent real-world scenarios where human experts and non-RL policies are common</strong>. Also, the majority of data comes from medium to expert policies. While not perfect, these datasets are valuable for benchmarking algorithms.</p>
+</section>
+<section id="open-x-embodiment-repository">
+<h2>Open X-Embodiment Repository<a class="headerlink" href="#open-x-embodiment-repository" title="Permalink to this heading">#</a></h2>
+<p>October 2023 - Partners from 33 academic labs.</p>
+<p>link to short <a class="reference external" href="https://www.youtube.com/watch?v=KYctzX69vsk">video</a></p>
+<p>This <a class="reference external" href="https://robotics-transformer-x.github.io/">library</a> introduced the <strong>Open X-Embodiment Repository</strong> that <strong>includes a dataset with 22 different robot types</strong> for X-embodiment learning, i.e. to learn from diverse and large-scale datasets from multiple robots for better transfer learning and improved generalization.</p>
+<p><a class="reference external" href="https://www.deepmind.com/blog/scaling-up-learning-across-many-different-robot-types">Let’s give a look</a></p>
+<p>GROOT Nvidia humanoid project: <a class="reference external" href="https://www.youtube.com/watch?v=CkjI_Laxwpw">link</a></p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/2004.07219"> [Fu.Justin et. al. ‘2021 ] D4RL: Datasets for Deep Data-Driven Reinforcement Learning</a></p>
+<p><a class="reference external" href="https://minari.farama.org/main/content/basic_usage/"> MINARI: A dataset API for Offline Reinforcement Learning </a></p>
+<p><a class="reference external" href="https://arxiv.org/abs/2006.13888"> C. Gulcehre et al. ‘2021, “RL unplugged: A suite of benchmarks for offline
+reinforcement learning</a></p>
+<p><a class="reference external" href="https://robotics-transformer-x.github.io/"> A. Padalkar et. al. ‘2023 Open X-Embodiment: Robotic Learning Datasets and RT-X Models </a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nb_0_IntroOfflineRL.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Offline Reinforcement Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nb_2_data_dollection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise: Minari data collection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minari-dataset">MINARI Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-minari-methods">Useful minari methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minari-dataset-structure">Minari dataset structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rl-unplugged-dataset">RL Unplugged dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-x-embodiment-repository">Open X-Embodiment Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ivan Rodriguez
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

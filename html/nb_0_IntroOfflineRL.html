@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Offline Reinforcement Learning &#8212; Offline Reinforcement Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/configmacros"]}, "tex": {"packages": {"[+]": ["configmacros"]}, "macros": {"vect": ["{\\mathbf{\\boldsymbol{#1}} }", 1], "E": "{\\mathbb{E}}", "P": "{\\mathbb{P}}", "R": "{\\mathbb{R}}", "abs": ["{\\left| #1 \\right|}", 1], "simpl": ["{\\Delta^{#1} }", 1], "amax": "{\\text{argmax}}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nb_0_IntroOfflineRL';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Open Source Datasets libraries for offline RL" href="nb_1_offline_RL_dataset_libraries.html" />
+    <link rel="prev" title="Offline RL Notes" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Offline Reinforcement Learning</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Offline RL Notes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Offline Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_1_offline_RL_dataset_libraries.html">Open Source Datasets libraries for offline RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_2_data_dollection.html">Exercise: Minari data collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nb_3_offline_RL_theory.html">Offline RL theory</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="nb_4_Offline_rl_exercises.html">Exercise: Offline RL algorithms</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/nb_0_IntroOfflineRL.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Offline Reinforcement Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-overview-offline-vs-online-rl">Problem Overview: Offline vs. Online RL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-rl-vs-supervised-learning">Offline RL vs supervised learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-vs-offline-learning-comparison">Online vs offline learning comparison.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-rl-il-pipeline">Offline RL/IL pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-note">Important Note</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">set_random_seed</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-offline-reinforcement-learning">
+<h1>Introduction to Offline Reinforcement Learning<a class="headerlink" href="#introduction-to-offline-reinforcement-learning" title="Permalink to this heading">#</a></h1>
+<p>Reinforcement learning algorithms mostly use online learning, which can be a challenge for their widespread adoption. RL
+involves continually learning from the environment by interacting with it based on the current policy and then using this
+learning to improve the policy.</p>
+<div ></div>
+<img src="./_static/images/nb_90_online_RL_cycle.png" alt="Snow" style="width:40%">
+<div class="slide title"> Fig.1 Online RL cycle </div>
+<p><strong>Why RL with data could be a very good approach</strong>:</p>
+<ul class="simple">
+<li><p>Online interaction isn’t always practical or safe due to expensive or risky data collection, especially in fields like robotics and healthcare.</p></li>
+<li><p>Even when online interaction is possible, there’s often a preference for using existing data. This is especially true in complex domains where big datasets are crucial for effective learning.</p></li>
+<li><p>Rewards could be complicated to build (think about self-driving cars) so if that knowledge is already present in your datasets you should use it. In offline RL you will need anyway to create a reward but it would be usually easier.</p></li>
+</ul>
+<p><strong>Offline Reinforcement Learning: also called Batch Reinforcement Learning, is a type of RL that uses large datasets collected beforehand for real-world applications on a large scale.</strong></p>
+<p><strong>With offline RL, the agent is trained using static datasets without any online interaction or exploration, which sets it apart from online RL methods.</strong></p>
+<p><strong>Some examples where offline RL could be highly beneficial:</strong></p>
+<p><strong>Decision’s Making in Health Care</strong>: In healthcare, we can use Markov decision processes to model the diagnosis and treatment of patients. Actions are interventions like tests and treatments, while observations are patient symptoms and test results. Offline RL is safer and more practical than active RL, as treating patients directly with partially trained policies is risky.</p>
+<p><strong>Learning Robotic Manipulation Skills</strong>: In robotics, we can use active RL for skill learning, but generalizing skills across different environments is challenging. Offline RL allows us to reuse previously collected data from various skills to accelerate learning of new skills. For example, making soup with onions and carrots can build on experiences with onions and meat or carrots and cucumbers, reducing the need for new data collection.</p>
+<p><strong>Autonomous Driving</strong>: Training autonomous vehicles in real-world environments can be dangerous and costly. Offline RL can use data from past driving experiences to improve vehicle control and decision-making, making it safer and more efficient.</p>
+<p><strong>Energy Management</strong>: Optimizing energy consumption in buildings or industrial processes can be a critical task. Offline RL can analyze historical energy usage data to develop efficient control strategies, reducing energy costs and environmental impact.</p>
+<p><strong>Finance</strong>: Portfolio management and trading strategies often require learning from historical financial data. Offline RL can help develop and refine investment policies by utilizing past market data.</p>
+<section id="problem-overview-offline-vs-online-rl">
+<h2>Problem Overview: Offline vs. Online RL<a class="headerlink" href="#problem-overview-offline-vs-online-rl" title="Permalink to this heading">#</a></h2>
+<p>The offline RL problem can be defined as a data-driven approach to the previously seen online RL methods.</p>
+<p>As before, the goal is to minimize the discounted expected reward. However, as pictured in fig.2, this is also one of the main difference between on-line and offline-rl. In <strong>online RL</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+J (\pi) = \mathbb{E}_{\tau \sim \pi(a|s)^{\text{online}}}  \left[ \sum_{t = 0}^{\infty} \gamma^t r (s_t, a_t) \right] \simeq
+{1 \over n} \sum_{i=0}^n R(\tau_i)
+\]</div>
+<p>while in <strong>offline RL</strong>:
+$<span class="math notranslate nohighlight">\(
+J (\pi) = \mathbb{E}_{ \color{red}{\tau \in D} \sim \pi(a|s)^{\text{offline}}}  \left[ \sum_{t = 0}^{\infty} \gamma^t r (s_t, a_t) \right] \simeq
+{1 \over n} \sum_{i=0}^n R(\tau_i)
+\)</span><span class="math notranslate nohighlight">\(
+with the dataset, \)</span>D = { \tau_i, i=1,..,n }$.</p>
+<img src="_static/images/90_offline_vs_online.png" alt="Snow" style="width:50%">
+<div class="slide title"> Fig.2 Online vs. Offline RL </div>
+<p><strong>The goal of offline RL is to derive an optimal or near-optimal policy directly from <span class="math notranslate nohighlight">\(D\)</span> without requiring further interactions with the environment</strong>.</p>
+<p><strong>As shown in the previous slide, in offline RL, we try to find the best trajectories within the dataset, in contrast to online RL, where the goal is to find the best possible one in the entire space.</strong></p>
+<img src="_static/images/nb_90_offline_vs_online_optimization.png" alt="Snow" style="width:100%"><img src="_static/images/90_online_vs_offline.png" alt="Snow" style="width:80%;">
+<div class="slide title"> Fig.3 Online vs. Offline RL </div>
+<p><strong>Note that <span class="math notranslate nohighlight">\(D\)</span> doesn’t necessarily need to be related to the specific task at hand, but it should be sufficiently representative (i.e., containing high-reward regions of the problem). If <span class="math notranslate nohighlight">\(D\)</span> is derived from data collected from unrelated tasks, we will need to design our own reward function, just as we did in the online RL setting.</strong></p>
+<p><strong>Notation: The behavior policy, <span class="math notranslate nohighlight">\(\pi_b\)</span> or <span class="math notranslate nohighlight">\(\pi_\beta\)</span> is usually a suboptimal policy, a random policy or provided by a human expert, or a mixture of them.</strong></p>
+<p>As an example of a behavior policy (<span class="math notranslate nohighlight">\(\pi_b\)</span>), when training a robot to navigate a room, <span class="math notranslate nohighlight">\(\pi_b\)</span> might involve rules like “avoid obstacles,” “move forward,” or “stop.” It could be operated manually by a human who controls the robot based on sensor data, such as lidar for collision detection, or it could be a combination of suboptimal policies.</p>
+</section>
+<section id="offline-rl-vs-supervised-learning">
+<h2>Offline RL vs supervised learning<a class="headerlink" href="#offline-rl-vs-supervised-learning" title="Permalink to this heading">#</a></h2>
+<p>But if the goal of offline RL is to derive an optimal policy from data, why not try a supervised learning approach to learn <span class="math notranslate nohighlight">\(\pi(a|s)\)</span>? Is it a viable approach?</p>
+<p>Yes, it is. This approach is called <strong>Imitation Learning (IL).</strong></p>
+<p><strong>Main differences between IL and offline RL:</strong></p>
+<p><strong>1 - In IL, the policy closely mirrors the behavior policy so the collected data is attached to the task you want to solve so it must contain expert data.</strong></p>
+<p><strong>2 - in offline RL, the aim is a superior policy, ideally close to the optimal one, and the data doesn’t need to be related to the task to solve and it can be far from optimal.</strong></p>
+<p><strong>3 - In IL you don’t need to create a reward function for your task</strong>. Quite useful in situations where creating a reward function directly is not feasible, such as when training a self-driving vehicle. <strong>However, you need a reward function on offline RL</strong>.</p>
+<p><strong>Behavioral Cloning (BC) is one of the simplest imitation learning algorithms</strong>, which essentially involves applying supervised learning to expert data collected during demonstrations:</p>
+<div class="math notranslate nohighlight">
+\[ D = \{(s_0, a_0), (s_1, a_1), \ldots, (s_T, a_T)\} \quad \tag{Dataset} \]</div>
+<div class="math notranslate nohighlight">
+\[\text{with} \quad \pi_{\theta^*}(s_t) \text{ s.t. } \theta^* = argmin_\theta  L_{BC}(\theta) \tag{learned policy}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{and} \quad L_{BC}(\theta) = \sum_{t=0}^T \left(\pi_\theta(s_t) - a_t\right)^2 \tag{Cost function}\]</div>
+<p>and, <span class="math notranslate nohighlight">\(\pi_\theta(s_t)\)</span>, typically a DNN. BC aims to minimize the discrepancy between the actions produced by the learned policy and the actions demonstrated by the expert.</p>
+<p><strong>IMPORTANT: In general, offline RL tends to outperform imitation learning in terms of performance, but imitation learning is faster and cheaper. If you have a fair amount of expert data, it can provide good results quickly and cost-effectively compared to offline RL.</strong></p>
+<p><strong>Summary so far</strong>:</p>
+<ul class="simple">
+<li><p>Online RL aims to find the best trajectories for a given task, whereas offline RL aims to find the best trajectories (combination of dataset trajectories) for the task within the provided dataset.</p></li>
+<li><p>Offline RL can utilize datasets generated from different tasks, requiring the definition of rewards in such cases.</p></li>
+<li><p>There are two primary approaches for offline learning: Imitation learning and Offline RL.</p></li>
+</ul>
+</section>
+<section id="online-vs-offline-learning-comparison">
+<h2>Online vs offline learning comparison.<a class="headerlink" href="#online-vs-offline-learning-comparison" title="Permalink to this heading">#</a></h2>
+<p>We will now compare online RL with the previously introduced offline methods: Offline RL and IL.</p>
+<p>One of the key distinction between online RL and offline RL/IL lies in their exploration capabilities. In online RL, we actively explore the state-action space, while offline RL/IL operates solely within a fixed dataset (denoted as <span class="math notranslate nohighlight">\(D\)</span>). Going “out of distribution” beyond this dataset in offline RL/IL can lead to severe issues.</p>
+<img src="_static/images/offline_RL.jpg" alt="offline_rl" style="width:60%;"><p><strong>Online RL involves interactive exploration to discover the highest-reward regions</strong> by gathering environmental feedback. In contrast, <strong>offline RL imposes strict limitations on exploration beyond the dataset. This constraint results in algorithms overestimating unknown areas and attempting to navigate beyond the dataset</strong>, as illustrated in the figure below where the dataset doesn’t fully represent high-reward regions.</p>
+<img src="_static/images/offline_RL_3.jpg" alt="offline_rl_1" style="width:50%;">
+<p>As shown in the figure above on the right, once you are out of distribution (o.o.d) (states <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(s'\)</span> in red), as you don’t have any feedback it will be hard to come back to <span class="math notranslate nohighlight">\(D\)</span>, as the o.o.d errors will propagate. As we will see this is one of the main challenges of offline RL and there are different techniques to mitigate this wrong behavior.</p>
+<p><strong>If you don’t follow the explanation below, don’t worry; just accept that once out of distribution (o.o.d.) occurs, it will be hard to return to in-distribution</strong></p>
+<p>Let’s try to get some intuition:</p>
+<p>Consider a cost function given by: <span class="math notranslate nohighlight">\( c(s,a) = 0  \text{ if } a = \pi^\beta(s)\)</span>, otherwise <span class="math notranslate nohighlight">\(c(s,a)=1\)</span>, where <span class="math notranslate nohighlight">\(\pi^\beta(s)\)</span> represents the behavior policy.  Additionally, assume that <span class="math notranslate nohighlight">\( \pi_\theta (a \ne \pi^\beta(s) | s) \le \epsilon \text{ for all } s \in D_{\text{train}} \)</span> . The total error can then be estimated as:</p>
+<img src="_static/images/93_imitation_learning.png" alt="Snow" style="width:80%;">
+<div class="slide title"> Fig.1 Assume that if the agent goes out-of-distribution, it is unlikely to recover. </div>
+<div class="math notranslate nohighlight">
+\[ \mathbb{E} \left[ \sum_t c(s_t, a_t) \right] \le \epsilon H + (1 - \epsilon) (\epsilon (H-1) +  ... ) \sim O(\epsilon H^2)\]</div>
+<p>with <span class="math notranslate nohighlight">\(H\)</span> being the time horizon.</p>
+<p>Question: What is the error if the episode terminate as soon as you are out-of-distribution?</p>
+<p>Solution: The error is of <span class="math notranslate nohighlight">\(O(\epsilon H)\)</span>.</p>
+<img src="_static/images/nb_90_missing_point.png" alt="offline_rl_1" style="width:100%;">
+<p><strong>When working with datasets, sometimes important data is missing, especially if it’s hard for the behavioral policy to collect (left figure). A good offline RL algorithm should be able to generate this missing data, which is impossible for imitation learning.</strong></p>
+<p><strong>On the other hand, if the data is missing because it’s outside the behavior policy’s capabilities (i.e., it’s truly o.o.d. data), then the algorithm should detect this and avoid generating it. There could be valid reasons why these states were excluded during data collection.</strong></p>
+<p><strong>This is not a major issue in general but it is important to mention</strong>:</p>
+<p><strong>The o.o.d. issues are not the only distributional shift effect in offline RL</strong>.
+After computing the optimal policy, it typically operates within a subset of the original dataset distribution, creating a distinct form of distributional shift (D’ subset in green in the figure below). Evaluating a policy substantially different from the behavior policy reduces the effective sample size (from D to D’), resulting in increased variance in the estimates. In simpler terms, the limited number of data points may not accurately represent the true data distribution.</p>
+<img src="_static/images/offline_RL_2.jpg" alt="offline_rl_2" style="width:60%;"><p><strong>So far, we have focused on the differences between online and offline RL, but as we will see in <span class="xref myst">nb_3_offline_RL_theory.ipynb</span> there are many points of contact. We will later explore how different techniques from online RL, particularly those from off-policy RL, can be applied to offline RL.</strong></p>
+<p><strong>Summary</strong>:</p>
+<ul class="simple">
+<li><p>In offline learning, it’s important to avoid out-of-distribution (o.o.d.) data since there may be valid reasons why these points are excluded from the dataset. Additionally, transitioning back to in-distribution data after encountering o.o.d. data can be challenging. This is not a concern in online RL.</p></li>
+<li><p>In offline learning, when data is missing from your dataset, it’s difficult to predict whether it’s due to collection issues or if it’s truly an out-of-distribution (o.o.d.) case. Imitation Learning (IL) cannot address this issue, but Offline RL attempts to determine the situation. If the data belongs to the behavioral policy distribution, it should be added since it could lead the agent to a high-reward region.</p></li>
+<li><p>If your dataset lacks representative data, there’s little you can do, and the solution is to collect more high-quality data.</p></li>
+</ul>
+</section>
+<section id="offline-rl-il-pipeline">
+<h2>Offline RL/IL pipeline<a class="headerlink" href="#offline-rl-il-pipeline" title="Permalink to this heading">#</a></h2>
+<img src="_static/images/93_offline_RL_pipeline.png" alt="Snow" style="width:80%;">
+<p><strong>Step 1 - Data</strong>: Typically, you’ll have a simulator/environment along with a behavior policy, <span class="math notranslate nohighlight">\(\pi_b(a|s)\)</span>, in order to
+collect data or instead access to historical data.</p>
+<p><strong>Step 2 - Dataset Manipulation</strong>: We’ll adopt a standard format widely used in the offline RL community, facilitated by
+the Minari library, which will be introduced later.</p>
+<p><strong>Steps 3/4/5 -  Dataset Feeding, Algorithm Selection, and Training</strong>: These tasks will be carried out using the
+Tianshou RL library.</p>
+</section>
+<section id="important-note">
+<h2>Important Note<a class="headerlink" href="#important-note" title="Permalink to this heading">#</a></h2>
+<p>On the exercises notebooks <strong>a 2D grid environment will be primarily used, for two important reasons</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>It allows for quick training and data collection</strong>, making trainings and
+data-collection quite fast giving the possibility to play around with different ideas!</p></li>
+<li><p><strong>Simplifying and customizing the environment to introduce varying levels of complexity in a controlled
+manner, along with the option to create your own straightforward behavior policies</strong>, can facilitate a
+clearer exploration of the core concepts and advantages of offline Reinforcement Learning (RL), which
+can be quite challenging or almost impossible with high-dimensional spaces.**</p></li>
+</ol>
+<p><strong>Please note that the code provided (src/offline_rl folder) is adaptable to tackle more intricate environments and tasks</strong>. Don’t hesitate to experiment with it on your own. Be prepared for some patience, as training in RL can be time-consuming when dealing with complex problems!</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://arxiv.org/pdf/2005.01643.pdf"> Levine et al. ‘2021 - Offline Reinforcement Learning: Tutorial, Review,
+and Perspectives on Open Problems </a>.</p>
+<p><a class="reference external" href="https://arxiv.org/pdf/2203.01387.pdf">Prudencio et al. ‘ 2023 - A Survey on Offline Reinforcement Learning: Taxonomy, Review, and Open Problems </a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Offline RL Notes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nb_1_offline_RL_dataset_libraries.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Open Source Datasets libraries for offline RL</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-overview-offline-vs-online-rl">Problem Overview: Offline vs. Online RL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-rl-vs-supervised-learning">Offline RL vs supervised learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#online-vs-offline-learning-comparison">Online vs offline learning comparison.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-rl-il-pipeline">Offline RL/IL pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-note">Important Note</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ivan Rodriguez
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
