@@ -15,3 +15,9 @@ Enjoy! 🎉
 
 - [SVI and Laplace Exercise using Pyro and Laplace libraries](Laplace_exercise) 📚
 - [Theory notes]() 📖
+
+<a href="/ivan-homepage/">
+    <button style="padding:10px 20px; background-color:#007BFF; color:white; border:none; border-radius:5px; cursor:pointer;">
+        Back to Home
+    </button>
+</a>
