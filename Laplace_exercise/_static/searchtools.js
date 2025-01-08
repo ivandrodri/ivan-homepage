@@ -78,7 +78,7 @@ const _displayItem = (item, searchTerms, highlightTerms) => {
     requestUrl = contentRoot + dirname;
     linkUrl = requestUrl;
   } else {
-    // normal html builders
+    // normal Laplace_exercise builders
     requestUrl = contentRoot + docName + docFileSuffix;
     linkUrl = docName + docLinkSuffix;
   }
@@ -177,7 +177,7 @@ const Search = {
   _pulse_status: -1,
 
   htmlToText: (htmlString, anchor) => {
-    const htmlElement = new DOMParser().parseFromString(htmlString, 'text/html');
+    const htmlElement = new DOMParser().parseFromString(htmlString, 'text/Laplace_exercise');
     for (const removalQuery of [".headerlink", "script", "style"]) {
       htmlElement.querySelectorAll(removalQuery).forEach((el) => { el.remove() });
     }
