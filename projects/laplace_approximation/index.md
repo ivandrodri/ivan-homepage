@@ -4,11 +4,14 @@ title: CNC milling simulation.
 permalink: /projects/laplace_approximation/
 ---
 
-# Bayesian Methods
+# Bayesian Deep Neural Networks
 
 These are part of my notes on Bayesian methods, specifically focusing on Deep Neural Networks (DNN) using 
-Stochastic Variational Inference (SVI) and the Laplace approximation. Below, you'll find a link to a Jupyter Book 
-notebook containing both practical exercises and theoretical explanations.
+Stochastic Variational Inference (SVI) in [pyro](https://github.com/pyro-ppl/pyro) and the Laplace 
+approximation using both, pyro and the [Laplace](https://github.com/aleximmer/laplace) library. 
 
-[SVI and Laplace Exercise using [Pyro](https://github.com/pyro-ppl/pyro) and [Laplace](https://github.com/aleximmer/laplace) libraries](Laplace_exercise)
-[Theory notes]()
+Below, you'll find a link to a Jupyter Book notebook containing a practical exercises and to theoretical explanations.
+Enjoy! 🎉
+
+- [SVI and Laplace Exercise using Pyro and Laplace libraries](Laplace_exercise) 📚
+- [Theory notes]() 📖
