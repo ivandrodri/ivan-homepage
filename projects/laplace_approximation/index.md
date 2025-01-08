@@ -13,7 +13,7 @@ approximation using both, pyro and the [Laplace](https://github.com/aleximmer/la
 Below, you'll find a link to a Jupyter Book notebook containing a practical exercises and to theoretical explanations.
 Enjoy! 🎉
 
-- [SVI and Laplace Exercise using Pyro and Laplace libraries](Laplace_exercise) 📚
+- [SVI and Laplace Exercise using Pyro and Laplace libraries](https://ivandrodri.github.io/laplace_approximation_page/index.html) 📚
 - [Theory notes]() 📖
 
 <a href="/ivan-homepage/">
