@@ -17,7 +17,7 @@ I have a proven track record of delivering impactful AI-driven projects.
 I am passionate about various fields of Machine Learning, particularly **Deep Learning, Bayesian Machine Learning, 
 Reinforcement Learning (RL), and the use of surrogate models to accelerate complex physics simulations**. 
 
-For several years now, I have been working intensively on applications of Large Language Models (LLMs), such as in **Retrieval-Augmented Generation (RAG) systems and agentic LLMs, as well as on generative AI for engineering design and the use of transformer architectures in areas like Imitation Learning and Behavioral Cloning.**
+For several years now, I have been working intensively on **Generative AI**, in particular applications of Large Language Models (LLMs), such as in **Retrieval-Augmented Generation (RAG) systems and agentic LLMs, as well as on generative AI for engineering design and the use of transformer architectures in areas like Imitation Learning and Behavioral Cloning.**
 
 ## Professional Timeline
 
