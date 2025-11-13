@@ -14,11 +14,10 @@ I have a proven track record of delivering impactful AI-driven projects.
 
 ## Expertise and Interests:
 
-I am passionate about various fields of Machine Learning, particularly Deep Learning, Bayesian Machine Learning, 
-Reinforcement Learning (RL), and the use of surrogate models to accelerate complex physics simulations. I am also 
-interested in applications of large language models (LLMs), such as in Retrieval-Augmented Generation (RAG) systems 
-and generative AI for engineering design, as well as the use of transformer architectures in areas like Imitation 
-Learning and Behavioral Cloning.
+I am passionate about various fields of Machine Learning, particularly **Deep Learning, Bayesian Machine Learning, 
+Reinforcement Learning (RL), and the use of surrogate models to accelerate complex physics simulations**. 
+
+For several years now, I have been working intensively on applications of Large Language Models (LLMs), such as in **Retrieval-Augmented Generation (RAG) systems and agentic LLMs, as well as on generative AI for engineering design and the use of transformer architectures in areas like Imitation Learning and Behavioral Cloning.**
 
 ## Professional Timeline
 
@@ -54,10 +53,13 @@ I have selected a few to showcase as examples of my previous work.
 
 ## Recent Highlights
 
-- Inventor of EU and US patents, including AI-driven imaging calibration technologies for electron microscopy and 
-  high-speed milling collision detection simulations in CNC manufacturing for process optimization.
-- Developed ML surrogate models that reduced CAD design optimization times from hours to seconds.
-- Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning for Tier 1 companies 
+- **Inventor of EU and US patents**, including AI-driven imaging calibration technologies for electron microscopy using Reinforcement Learning, and high-
+  speed milling collision detection simulations in CNC manufacturing for process optimization leveraging GPU-based HPC computing
+- **NVIDIA-certified RAG Instructor** - [for more info](https://www.nvidia.com/en-us/learn/certified-instructor-program/).
+- **Designed a RAG-based agent** capable of autonomously extracting, interpreting, and validating design rules from technical documentation through 
+  iterative self-refinement.
+- **Developed ML surrogate models** that reduced CAD design optimization times from hours to seconds.
+- **Delivered advanced AI workshops on Bayesian ML and Reinforcement Learning** for Tier 1 companies 
  [link1](https://transferlab.ai/trainings/intro-rl/) - [link2](https://transferlab.ai/trainings/bayesian-ml-intro/).
 
 ## Selected Physic Publications
