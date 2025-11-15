@@ -1,8 +1,6 @@
 # CV
 
-Welcome to my personal CV webpage! This site showcases my professional journey, technical expertise, and 
-some of the cool projects I had the opportunity to work with as an AI engineer and as a theoretical physicist researcher
-in academia. 
+Welcome! This site highlights my experience and projects in AI and theoretical physics. It’s still a work in progress, so stay tuned for updates.
 
 ## About Me
 
@@ -31,8 +29,7 @@ For several years now, I have been working intensively on **Generative AI**, in 
 
 ## Selected Projects
 
-I have worked on many cool projects throughout my academic and private sector career. While many of these are confidential, 
-I have selected a few to showcase as examples of my previous work.
+I have worked on many exciting projects throughout my academic and private-sector career. While many are confidential, I’ve selected a few personal projects to showcase here. More to come! 
 
 - <a href="/ivan-homepage/projects/offline_rl">Offline RL using Tianshou and Minari (WIP)</a> (this example uses the
  code in my [repo](https://github.com/ivandrodri/offline-rl.git) - give a look at the [html notebooks](https://ivandrodri.github.io/offline-rl/index.html) to see 
